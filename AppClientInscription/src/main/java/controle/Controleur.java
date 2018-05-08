@@ -1,4 +1,4 @@
-package controle;
+package main.java.controle;
 
 import java.io.IOException;
 import javax.jms.*;

@@ -1,7 +1,6 @@
 .idea/
-out/
-target/
 *.iml
+out/
 ProjetCerisaie/.idea/
 ProjetCerisaie/out/
 ProjetCerisaie/classes/

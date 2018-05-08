@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" version="2.1">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.projetcerisaie.metiers.Entities.ActiviteEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.ClientEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.EmplacementEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.SejourEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.SportEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.TypeEmplacementEntity</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/cerisaie"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="userepul"/>
+            <property name="hibernate.connection.password" value="epul"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hbm2ddl.auto" value="update" />
+            <property name="hibernate.max_fetch_depth" value="3"/>
+        </properties>
+    </persistence-unit>
+</persistence>
