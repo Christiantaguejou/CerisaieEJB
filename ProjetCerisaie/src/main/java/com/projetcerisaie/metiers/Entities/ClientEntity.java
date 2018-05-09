@@ -14,6 +14,19 @@ public class ClientEntity {
     private String pieceCli;
     private int numPieceCli;
 
+    public ClientEntity(int numCli, String nomCli, String adrRueCli, int cpCli, String villeCli, String pieceCli, int numPieceCli) {
+        this.numCli = numCli;
+        this.nomCli = nomCli;
+        this.adrRueCli = adrRueCli;
+        this.cpCli = cpCli;
+        this.villeCli = villeCli;
+        this.pieceCli = pieceCli;
+        this.numPieceCli = numPieceCli;
+    }
+
+    public ClientEntity() {
+    }
+
     @Id
     @Column(name = "NumCli", nullable = false)
     public int getNumCli() {
@@ -25,7 +38,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "NomCli", nullable = false, length = 100)
+    @Column(name = "NomCli", length = 100, nullable = false)
     public String getNomCli() {
         return nomCli;
     }
@@ -35,7 +48,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "AdrRueCli", nullable = false, length = 50)
+    @Column(name = "AdrRueCli", length = 50, nullable = false)
     public String getAdrRueCli() {
         return adrRueCli;
     }
@@ -55,7 +68,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "VilleCli", nullable = false, length = 50)
+    @Column(name = "VilleCli", length = 50, nullable = false)
     public String getVilleCli() {
         return villeCli;
     }
@@ -65,7 +78,7 @@ public class ClientEntity {
     }
 
     @Basic
-    @Column(name = "PieceCli", nullable = false, length = 2)
+    @Column(name = "PieceCli", length = 2, nullable = false)
     public String getPieceCli() {
         return pieceCli;
     }
