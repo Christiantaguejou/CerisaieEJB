@@ -8,18 +8,9 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 @Repository
-public class ClientDaoImp implements ClientDao{
+public class ClientDaoImp extends EntityService implements ClientDao{
     /*@PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;*/
-
-    protected EntityManager entitymanager;
-    protected EntityManagerFactory emf;
-    public EntityTransaction startTransaction() {
-        emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
-        entitymanager = emf.createEntityManager();
-
-        return entitymanager.getTransaction();
-    }
 
     @Override
     public void add(ClientEntity clientEntity) {

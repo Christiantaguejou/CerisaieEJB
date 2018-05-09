@@ -13,7 +13,5 @@ public class test {
         // Add Persons
         personService.add(new ClientEntity(14, "Bora","12",12,"12","12",12));
 
-
-
     }
 }
