@@ -1,6 +1,7 @@
 package com.projetcerisaie.metiers.controller;
 
 import com.projetcerisaie.metiers.Entities.ClientEntity;
+import com.projetcerisaie.metiers.Entities.SejourEntity;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,12 +38,36 @@ public class HomeController {
 
         return new RedirectView(destinationPage);
     }
+    @RequestMapping(value = "insererSejour.htm")
+    public View insererSejour(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "listerAdherent.htm";
+        try {
+            GeneralOperations generalOperations = new GeneralOperations();
+            generalOperations.insert(constructSejourEntity(request));
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "erreur.htm";
+        }
+
+        return new RedirectView(destinationPage);
+    }
 
     @RequestMapping(value = "inscriptionClient.htm")
     public ModelAndView inscriptionClient(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         try {
             destinationPage = "inscriptionClient";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+    @RequestMapping(value = "reservationSejour.htm")
+    public ModelAndView reservationSejour(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "";
+        try {
+            destinationPage = "reservationSejour";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -60,5 +85,13 @@ public class HomeController {
         client.setPieceCli(request.getParameter("pieceCli"));
         return client;
     }
+    private SejourEntity constructSejourEntity(HttpServletRequest request) {
+        SejourEntity sejour = new SejourEntity();
+
+        return sejour;
+    }
+    //TODO ajouter colonne disponibilite a emplacement et penser à espace client
+    //TODO tarif en fonction de la durée du sejour
+
 
 }

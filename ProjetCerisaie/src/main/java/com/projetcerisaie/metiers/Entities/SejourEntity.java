@@ -12,6 +12,15 @@ public class SejourEntity {
     private Date dateFinSej;
     private int nbPersonnes;
 
+    public SejourEntity(Date datedebSej, Date dateFinSej, int nbPersonnes) {
+        this.datedebSej = datedebSej;
+        this.dateFinSej = dateFinSej;
+        this.nbPersonnes = nbPersonnes;
+    }
+//TODO effectuer le mapping des clés etrangères
+    public SejourEntity() {
+    }
+
     @Id
     @Column(name = "NumSej", nullable = false)
     public int getNumSej() {
