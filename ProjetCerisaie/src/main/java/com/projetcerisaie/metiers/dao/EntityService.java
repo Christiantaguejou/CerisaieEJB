@@ -1,5 +1,6 @@
 package com.projetcerisaie.metiers.dao;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -14,7 +15,7 @@ public abstract class EntityService {
     protected EntityManagerFactory emf;
 
     public EntityTransaction startTransaction() {
-        emf = Persistence.createEntityManagerFactory("oeuvresjpa");
+        emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
         entitymanager = emf.createEntityManager();
 
         return entitymanager.getTransaction();

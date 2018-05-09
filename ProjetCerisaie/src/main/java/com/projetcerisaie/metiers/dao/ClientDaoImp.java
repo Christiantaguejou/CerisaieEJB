@@ -12,15 +12,6 @@ public class ClientDaoImp extends EntityService implements ClientDao{
     /*@PersistenceContext(unitName = "NewPersistenceUnit")
     private EntityManager em;*/
 
-    @Override
-    public void add(ClientEntity clientEntity) {
-        EntityTransaction transac = startTransaction();
-        transac.begin();
-        entitymanager.persist(clientEntity);
-        transac.commit();
-        entitymanager.close();
-        //em.persist(clientEntity);
-    }
 
     @Override
     public List<ClientEntity> listClients() {

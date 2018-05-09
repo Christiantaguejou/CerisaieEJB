@@ -1,17 +1,16 @@
 package com.projetcerisaie.metiers;
 
 import com.projetcerisaie.metiers.Entities.ClientEntity;
-import com.projetcerisaie.metiers.services.ClientService;
-import com.projetcerisaie.metiers.services.ClientServiceImp;
+import com.projetcerisaie.metiers.dao.GeneralOperations;
+import com.projetcerisaie.metiers.meserreurs.MonException;
 
 public class test {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws MonException {
 
-
-        ClientService personService = new ClientServiceImp();
+        GeneralOperations generalOperations = new GeneralOperations();
 
         // Add Persons
-        personService.add(new ClientEntity(14, "Bora","12",12,"12","12",12));
+        generalOperations.delete(new ClientEntity(18, "Bor4","12",12,"12","12",12));
 
     }
 }
