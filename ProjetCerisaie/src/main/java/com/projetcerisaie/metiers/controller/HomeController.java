@@ -57,6 +57,7 @@ public class HomeController {
         client.setAdrRueCli(request.getParameter("adresse"));
         client.setCpCli(Integer.parseInt(request.getParameter("codePostal")));
         client.setVilleCli(request.getParameter("ville"));
+        client.setPieceCli(request.getParameter("pieceCli"));
         return client;
     }
 

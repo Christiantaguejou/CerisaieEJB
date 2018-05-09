@@ -42,6 +42,12 @@
             <input type="text" class="form-control"  id="codePostal" name="codePostal" placeholder="Ville de l'adhérent" required>
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-md-4 col-xs-4">Code Postal:</label>
+        <div class="col-md-8 col-xs-8">
+            <input type="text" class="form-control"  id="pieceCli" name="pieceCli" placeholder="Ville de l'adhérent" required>
+        </div>
+    </div>
     <button type="submit" class="btn btn-default">Ajouter</button>
 </form>
 </body>
