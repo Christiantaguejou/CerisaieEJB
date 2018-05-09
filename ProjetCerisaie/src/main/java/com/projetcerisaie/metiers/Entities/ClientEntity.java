@@ -14,8 +14,7 @@ public class ClientEntity {
     private String pieceCli;
     private int numPieceCli;
 
-    public ClientEntity(int numCli, String nomCli, String adrRueCli, int cpCli, String villeCli, String pieceCli, int numPieceCli) {
-        this.numCli = numCli;
+    public ClientEntity(String nomCli, String adrRueCli, int cpCli, String villeCli, String pieceCli, int numPieceCli) {
         this.nomCli = nomCli;
         this.adrRueCli = adrRueCli;
         this.cpCli = cpCli;
