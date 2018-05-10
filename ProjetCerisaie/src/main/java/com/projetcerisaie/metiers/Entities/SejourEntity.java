@@ -15,10 +15,12 @@ public class SejourEntity {
     private ClientEntity clientEntity;
     private EmplacementEntity emplacementEntity;
 
-    public SejourEntity(Date datedebSej, Date dateFinSej, int nbPersonnes) {
+    public SejourEntity(Date datedebSej, Date dateFinSej, int nbPersonnes,ClientEntity clientEntity,EmplacementEntity emplacementEntity) {
         this.datedebSej = datedebSej;
         this.dateFinSej = dateFinSej;
         this.nbPersonnes = nbPersonnes;
+        this.clientEntity=clientEntity;
+        this.emplacementEntity=emplacementEntity;
     }
 //TODO effectuer le mapping des clés etrangères
     public SejourEntity() {

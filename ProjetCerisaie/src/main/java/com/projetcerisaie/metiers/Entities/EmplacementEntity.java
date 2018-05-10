@@ -10,6 +10,8 @@ public class EmplacementEntity {
     private short surfaceEmpl;
     private short nbPersMaxEmpl;
 
+    private TypeEmplacementEntity typeEmplacementEntity;
+
     @Id
     @Column(name = "NumEmpl", nullable = false)
     public int getNumEmpl() {
@@ -48,6 +50,16 @@ public class EmplacementEntity {
         return numEmpl == that.numEmpl &&
                 surfaceEmpl == that.surfaceEmpl &&
                 nbPersMaxEmpl == that.nbPersMaxEmpl;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "CodeTypeE",referencedColumnName = "CodeTypeE",nullable = false)
+    public TypeEmplacementEntity getTypeEmplacementEntity() {
+        return typeEmplacementEntity;
+    }
+
+    public void setTypeEmplacementEntity(TypeEmplacementEntity typeEmplacementEntity) {
+        this.typeEmplacementEntity = typeEmplacementEntity;
     }
 
     @Override
