@@ -15,7 +15,6 @@ public class MonException  extends Exception  {
 
     public MonException( String libelle) {
         this.message = libelle;
-       
     }
 
     public String getMessage() {

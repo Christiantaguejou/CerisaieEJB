@@ -1,8 +1,10 @@
 package com.projetcerisaie.metiers.controller;
 
+import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejourEntity;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
+import com.projetcerisaie.metiers.meserreurs.MonException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -10,20 +12,40 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.annotation.Resource;
+import javax.jms.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 @Controller
 public class HomeController {
+    // On accède à l'EJB
+    @Resource(lookup = "java:jboss/exported/topic/CerisaieTopic")
+    private Topic topic;
+
+    @Resource(mappedName = "java:/ConnectionFactory")
+    private TopicConnectionFactory cf;
+
+    // Session établie avec le serveur
+    private TopicSession session = null;
+
+    // Le client utilise un Producteur de messsage pour envoyer une demande d'enregistrement
+    private TopicPublisher producer;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String home() {
         return "home";
     }
+
     @RequestMapping(value = "index.htm", method = RequestMethod.GET)
     public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
         return new ModelAndView("index");
     }
+    //TODO affichage erreur
+    //TODO increment Nbloc lors de prochaine loc
 /*
     public ModelAndView Erreur(Object o) {
 
@@ -44,6 +66,24 @@ public class HomeController {
 
         return new RedirectView(destinationPage);
     }
+
+    @RequestMapping(value = "insererActivite.htm")
+    public View insererActivite(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "listerAdherent.htm";
+        try {
+            if(!enregistrerActivite(constructActiviteEntity(request))) {
+                request.setAttribute("MesErreurs", "L'enregistrement a échoué");
+                destinationPage = "Erreur.htm";
+            }
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "erreur.htm";
+        }
+
+        return new RedirectView(destinationPage);
+    }
+
+
     @RequestMapping(value = "insererSejour.htm")
     public View insererSejour(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "listerAdherent.htm";
@@ -69,7 +109,19 @@ public class HomeController {
         }
         return new ModelAndView(destinationPage);
     }
-    @RequestMapping(value = "reservationSejour.htm")
+    @RequestMapping(value = "inscriptionActivite.htm")
+    public ModelAndView inscriptionActivite(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "";
+        try {
+            destinationPage = "inscriptionActivite";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping(value = "reservationSejour.htm",method = RequestMethod.GET)
     public ModelAndView reservationSejour(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         try {
@@ -79,6 +131,13 @@ public class HomeController {
             destinationPage = "Erreur";
         }
         return new ModelAndView(destinationPage);
+    }
+
+    // / Affichage de la page d'accueil
+    // /
+    @RequestMapping(value = "erreur.htm", method = RequestMethod.GET)
+    public ModelAndView AfficheErreur(HttpServletRequest request, HttpServletResponse response) {
+        return new ModelAndView("Erreur");
     }
 
     private ClientEntity constructClientEntity(HttpServletRequest request) {
@@ -91,13 +150,63 @@ public class HomeController {
         client.setPieceCli(request.getParameter("pieceCli"));
         return client;
     }
+
     private SejourEntity constructSejourEntity(HttpServletRequest request) {
         SejourEntity sejour = new SejourEntity();
 
         return sejour;
     }
+
+    private ActiviteEntity constructActiviteEntity(HttpServletRequest request) throws ParseException {
+        ActiviteEntity activite = new ActiviteEntity();
+        String dateLocation = request.getParameter("dateLocation");
+        java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateLocation);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String parsedDate = formatter.format(initDate);
+        initDate = formatter.parse(parsedDate);
+        Date dateLoc = new Date(initDate.getTime());
+        activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
+        activite.setDateJour(dateLoc);
+        activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
+        activite.setNbLoc(Short.parseShort(request.getParameter("nBLoc")));
+
+        return activite;
+    }
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
     //TODO tarif en fonction de la durée du sejour
 
+    boolean enregistrerActivite(ActiviteEntity activite) throws Exception {
 
+        boolean ok = true;
+        TopicConnection connection = null;
+
+        try {
+            // On crée la connexion JMS , session, producteur et message;          /*           *
+            //connection = connectionFactory.createConnection(System.getProperty("username", DEFAULT_USERNAME), System.getProperty("password", DEFAULT_PASSWORD));
+            // Création Connection et Session JMS
+            connection = cf.createTopicConnection();
+            session = connection.createTopicSession(false, Session.AUTO_ACKNOWLEDGE);
+
+            // On crée le producteur utilisé pour envoyer un message
+            producer = session.createPublisher(topic);
+            // On lance la connection
+            connection.start();
+            ObjectMessage message = session.createObjectMessage();
+            message.setObject(activite);
+            // On publie le message
+            producer.publish(message);
+            producer.close();
+            session.close();
+            connection.close();
+        } catch (JMSException j) {
+            new MonException(j.getMessage());
+            System.out.println(j.getMessage());
+            ok = false;
+        } catch (Exception e) {
+            new MonException(e.getMessage());
+            System.out.println(e.getMessage());
+            ok = false;
+        }
+        return ok;
+    }
 }

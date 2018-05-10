@@ -38,7 +38,7 @@ public class FonctionsUtiles {
 	}
 	
 	
-	public static Date conversionChaineenDate(String unedate, String unformat)
+	public static Date conversionChaineEnDate(String unedate, String unformat)
 			throws Exception {
 		Date datesortie;
 		// on d�finit un format de sortie
