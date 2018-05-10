@@ -12,6 +12,9 @@ public class SejourEntity {
     private Date dateFinSej;
     private int nbPersonnes;
 
+    private ClientEntity clientEntity;
+    private EmplacementEntity emplacementEntity;
+
     public SejourEntity(Date datedebSej, Date dateFinSej, int nbPersonnes) {
         this.datedebSej = datedebSej;
         this.dateFinSej = dateFinSej;
@@ -77,4 +80,25 @@ public class SejourEntity {
 
         return Objects.hash(numSej, datedebSej, dateFinSej, nbPersonnes);
     }
+
+    @ManyToOne
+    @JoinColumn(name = "NumCli",referencedColumnName = "NumCli",nullable = false)
+    public ClientEntity getClientEntity() {
+        return clientEntity;
+    }
+
+    public void setClientEntity(ClientEntity clientEntity) {
+        this.clientEntity = clientEntity;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "NumEmpl",referencedColumnName = "NumEmpl",nullable = false)
+    public EmplacementEntity getEmplacementEntity() {
+        return emplacementEntity;
+    }
+
+    public void setEmplacementEntity(EmplacementEntity emplacementEntity) {
+        this.emplacementEntity = emplacementEntity;
+    }
+
 }
