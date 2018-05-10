@@ -1,8 +1,7 @@
 package com.projetcerisaie.metiers.DrivenBeans;
-
+/*
 import Entities.Order.Order;
 import Entities.Order.OrderLine;
-
 import javax.annotation.Resource;
 import javax.ejb.EJBException;
 import javax.ejb.MessageDriven;
@@ -13,19 +12,14 @@ import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Date;
-
 import static javax.mail.Message.RecipientType.TO;
-/*
-* ,activationConfig = {
-        @ActivationConfigProperty(propertyName = "destinationType", propertyValue = "javax.jms.Topic"),
-        @ActivationConfigProperty(propertyName = "subscriptionDurability", propertyValue = "Durable"),
-        @ActivationConfigProperty(propertyName = "clientId", propertyValue = "emailSenderID"),
-        @ActivationConfigProperty(propertyName = "subscriptionName", propertyValue = "EmailSender"*/
 
-@MessageDriven(name = "EmailSenderEJB",mappedName = "jms/topic/order")
+
+@MessageDriven(name = "EmailSenderEJB",mappedName = "java:jboss/exported/topic/SendEmailTopic")
 public class EmailSenderBean implements MessageListener {
     @Resource(mappedName = "jms/javamail/sendmailsession")
     Session session;
+   /*
     // ======================================
     // =             Attributes             =
     // ======================================
@@ -37,7 +31,7 @@ public class EmailSenderBean implements MessageListener {
     // ======================================
     // =           Private methods          =
     // ======================================
-
+/*
     private void sendEMail(Order order) throws MessagingException {
         final String mname = "createAndSendMail";
 
@@ -69,7 +63,7 @@ public class EmailSenderBean implements MessageListener {
                 transport.close();
             } catch (MessagingException e) {
             }
-        }*/
+        }
     }
 
     private String formatSubject(Order order) {
@@ -115,4 +109,4 @@ public class EmailSenderBean implements MessageListener {
             throw new EJBException(e);
         }
     }
-}
+}*/

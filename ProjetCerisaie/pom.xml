@@ -46,7 +46,6 @@
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-core</artifactId>
           <version>5.2.12.Final</version>
-
       </dependency>
     <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-entitymanager -->
     <dependency>
@@ -55,14 +54,23 @@
       <version>5.2.12.Final</version>
 
     </dependency>
+      <!-- https://mvnrepository.com/artifact/javax.jms/javax.jms-api -->
+      <dependency>
+          <groupId>javax.jms</groupId>
+          <artifactId>javax.jms-api</artifactId>
+          <version>2.0.1</version>
+      </dependency>
     <!--<scope>provided</scope> Mysql connectorr-->
     <dependency>
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>5.1.36</version>
     </dependency>
-
-
+  <dependency>
+      <groupId>javax.ejb</groupId>
+      <artifactId>javax.ejb-api</artifactId>
+      <version>3.2.2</version>
+  </dependency>
   </dependencies>
 
   <build>

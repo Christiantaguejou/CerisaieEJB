@@ -1,13 +1,15 @@
 package com.projetcerisaie.metiers.Entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "activite", schema = "cerisaie", catalog = "")
 @IdClass(ActiviteEntityPK.class)
-public class ActiviteEntity {
+public class ActiviteEntity implements Serializable {
+    private static final long serialVersionUID = -4534403211896089134L;
     private int codeSport;
     private Date dateJour;
     private int numSej;

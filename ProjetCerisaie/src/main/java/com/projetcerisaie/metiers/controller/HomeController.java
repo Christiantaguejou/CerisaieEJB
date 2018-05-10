@@ -24,6 +24,12 @@ public class HomeController {
     public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
         return new ModelAndView("index");
     }
+/*
+    public ModelAndView Erreur(Object o) {
+
+        return new ModelAndView("Erreur");
+    }*/
+
 
     @RequestMapping(value = "insererClient.htm")
     public View insererAdherent(HttpServletRequest request, HttpServletResponse response) {
