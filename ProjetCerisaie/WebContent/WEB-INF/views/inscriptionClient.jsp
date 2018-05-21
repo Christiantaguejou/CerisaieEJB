@@ -25,27 +25,27 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-4 col-xs-4">Ville de l'adhérent:</label>
+        <label class="col-md-4 col-xs-4">Numéro de Pièce d'identité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="numPieceCli" name="numPieceCli" placeholder="Ville de l'adhérent" required>
+            <input type="text" class="form-control"  id="numPieceCli" name="numPieceCli" placeholder="ex:12345" required>
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-4 col-xs-4">Ville de l'adhérent:</label>
+        <label class="col-md-4 col-xs-4">Adresse:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="adresse" name="adresse" placeholder="Ville de l'adhérent" required>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-4 col-xs-4">Code Postal:</label>
-        <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="codePostal" name="codePostal" placeholder="Ville de l'adhérent" required>
+            <input type="text" class="form-control"  id="adresse" name="adresse" placeholder="ex:12 rue des allouettes" required>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Postal:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="pieceCli" name="pieceCli" placeholder="Ville de l'adhérent" required>
+            <input type="text" class="form-control"  id="codePostal" name="codePostal" placeholder="ex:69110" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 col-xs-4">Type de Pièce d'identité:</label>
+        <div class="col-md-8 col-xs-8">
+            <input type="text" class="form-control"  id="pieceCli" name="pieceCli" placeholder="CI/PS/PC" required>
         </div>
     </div>
     <button type="submit" class="btn btn-default">Ajouter</button>

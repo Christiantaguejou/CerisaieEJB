@@ -52,7 +52,6 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
       <version>5.2.12.Final</version>
-
     </dependency>
       <!-- https://mvnrepository.com/artifact/javax.jms/javax.jms-api -->
       <dependency>

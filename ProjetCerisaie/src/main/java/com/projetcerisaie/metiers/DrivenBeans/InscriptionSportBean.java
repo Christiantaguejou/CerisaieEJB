@@ -1,5 +1,5 @@
 package com.projetcerisaie.metiers.DrivenBeans;
-
+/*
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
 import com.projetcerisaie.metiers.meserreurs.MonException;
@@ -50,3 +50,4 @@ public class InscriptionSportBean implements MessageListener {
         }
     }
 }
+*/
