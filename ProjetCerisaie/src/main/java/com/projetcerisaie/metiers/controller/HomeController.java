@@ -40,9 +40,9 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "index.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "home.htm", method = RequestMethod.GET)
     public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("index");
+        return new ModelAndView("home");
     }
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
