@@ -13,8 +13,22 @@ import java.util.Map;
 
 public class ActivityService extends EntityService {
 
+    /**
+     * Liste toutes les activités
+     * @return Activity
+     */
     public List<Activity> listActivities() {
         List<Activity> activities = parseToActivity(getActiviteEntities());
+        return activities;
+    }
+
+    /**
+     * @param idSport identifiant du Sport
+     * Liste toutes les activités du sport idSport
+     * @return Activity
+     */
+    public List<Activity> listActivitiesBySport(int idSport) {
+        List<Activity> activities = parseToActivity(getActiviteEntitiesBySport(idSport));
         return activities;
     }
 
@@ -68,6 +82,14 @@ public class ActivityService extends EntityService {
         EntityTransaction transaction = startTransaction();
         transaction.begin();
         activities = (List<ActiviteEntity>) entitymanager.createQuery("select a from ActiviteEntity a order by DateJour DESC ").getResultList();
+        entitymanager.close();
+        return activities;
+    }
+    public List<ActiviteEntity> getActiviteEntitiesBySport(int idSport) {
+        List<ActiviteEntity> activities = null;
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        activities = (List<ActiviteEntity>) entitymanager.createQuery("select a from ActiviteEntity a where a.codeSport = " + idSport + "order by DateJour DESC ").getResultList();
         entitymanager.close();
         return activities;
     }
