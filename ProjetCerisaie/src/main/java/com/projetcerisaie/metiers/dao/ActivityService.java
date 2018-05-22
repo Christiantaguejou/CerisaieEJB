@@ -1,0 +1,75 @@
+package com.projetcerisaie.metiers.dao;
+
+import com.projetcerisaie.metiers.Entities.ActiviteEntity;
+import com.projetcerisaie.metiers.Entities.SejourEntity;
+import com.projetcerisaie.metiers.Entities.SportEntity;
+import com.projetcerisaie.metiers.models.Activity;
+
+import javax.persistence.EntityTransaction;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ActivityService extends EntityService {
+
+    public List<Activity> listActivities() {
+        List<Activity> activities = parseToActivity(getActiviteEntities());
+        return activities;
+    }
+
+    public List<Activity> parseToActivity(List<ActiviteEntity> entities) {
+        List<Activity> activities = new ArrayList<>();
+        // On fait des hashmap pour éviter d'aller chercher deux fois la même valeur dans la bd
+        Map<Integer, SejourEntity> sejourEntityMap = new HashMap<>();
+        Map<Integer, SportEntity> sportEntityMap = new HashMap<>();
+        for (ActiviteEntity entity : entities) {
+            int idSport = entity.getCodeSport();
+            int idSejour = entity.getNumSej();
+            SejourEntity sejour;
+            SportEntity sport;
+            if (sejourEntityMap.containsKey(idSejour)) {
+                sejour = sejourEntityMap.get(idSejour);
+            } else {
+                sejour = getSejourEntity(idSejour);
+                sejourEntityMap.put(idSejour, sejour);
+            }
+            if (sportEntityMap.containsKey(idSport)) {
+                sport = sportEntityMap.get(idSport);
+            } else {
+                sport = getSportEntity(idSport);
+                sportEntityMap.put(idSport, sport);
+            }
+            activities.add(new Activity(entity, sejour, sport));
+        }
+        return activities;
+    }
+
+    public SejourEntity getSejourEntity(int id) {
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        SejourEntity sejour = entitymanager.find(SejourEntity.class, id);
+        transaction.commit();
+        entitymanager.close();
+        return sejour;
+    }
+
+    public SportEntity getSportEntity(int id) {
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        SportEntity sport = entitymanager.find(SportEntity.class, id);
+        transaction.commit();
+        entitymanager.close();
+        return sport;
+    }
+
+    public List<ActiviteEntity> getActiviteEntities() {
+        List<ActiviteEntity> activities = null;
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        activities = (List<ActiviteEntity>) entitymanager.createQuery("select a from ActiviteEntity a order by DateJour DESC ").getResultList();
+        entitymanager.close();
+        return activities;
+    }
+
+}

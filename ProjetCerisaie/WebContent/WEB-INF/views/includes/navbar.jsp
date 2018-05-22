@@ -5,6 +5,7 @@
         </div>
         <ul class="nav navbar-nav">
             <li class="active"><a href="home.htm">Accueil</a></li>
+            <li><a href="planning.htm">Planning</a></li>
         </ul>
     </div>
 </nav>

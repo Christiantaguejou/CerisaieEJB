@@ -11,9 +11,9 @@
 <div>
     <div class="container">
         <div class="form-group">
-            <label> Gestion des demandes d'inscription </label>
+            <label>Acceuil</label>
             <BR> <BR>
-            <label>Bienvenue sur la page d'accueil de gestion des demandes d'inscription. </label>
+            <label>Bienvenue sur la page d'accueil du camping Cerisaie</label>
         </div>
     </div>
 </div>
