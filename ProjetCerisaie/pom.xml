@@ -10,7 +10,6 @@
   <description>Spring MVC Project</description>
 
   <dependencies>
-
     <!--Spring MVC Dependencies-->
     <dependency>
       <groupId>org.springframework</groupId>
