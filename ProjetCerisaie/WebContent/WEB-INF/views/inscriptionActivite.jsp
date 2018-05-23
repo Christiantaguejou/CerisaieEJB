@@ -24,6 +24,7 @@
             <input type="text" class="form-control"  id="dateLocation" name="dateLocation" placeholder="dateLocation" required>
         </div>
     </div>
+  <!--  <script>$( "#datenaissance" ).datepicker();</script> -->
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Numéro de séjour:</label>
         <div class="col-md-8 col-xs-8">
@@ -31,9 +32,9 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-md-4 col-xs-4">Ville de l'adhérent:</label>
+        <label class="col-md-4 col-xs-4">Nombre d'unité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="nbLoc" name="nbLoc" placeholder="nbLoc" required>
+            <input type="text" class="form-control"  id="nbloc" name="nbloc" placeholder="nbloc" required>
         </div>
     </div>
     <button type="submit" class="btn btn-default">Ajouter</button>

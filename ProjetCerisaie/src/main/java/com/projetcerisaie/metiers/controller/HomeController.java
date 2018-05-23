@@ -1,5 +1,6 @@
 package com.projetcerisaie.metiers.controller;
 
+import com.projetcerisaie.metiers.Entities.Activite;
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejourEntity;
@@ -22,17 +23,17 @@ import java.text.SimpleDateFormat;
 
 @Controller
 public class HomeController {
-    // On accède à l'EJB
-    @Resource(lookup = "java:jboss/exported/topic/CerisaieTopic")
+    @Resource(lookup = "java:jboss/exported/topic/InscriptionJmsTopic")
     private Topic topic;
 
+    // On accède à l'EJB
     @Resource(mappedName = "java:/ConnectionFactory")
     private TopicConnectionFactory cf;
 
     // Session établie avec le serveur
     private TopicSession session = null;
 
-    // Le client utilise un Producteur de messsage pour envoyer une demande d'enregistrement
+    // Le client utilise un Producteur de messsage pour envoyer une demande de formation
     private TopicPublisher producer;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -71,7 +72,13 @@ public class HomeController {
     public View insererActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "listerAdherent.htm";
         try {
-            if(!enregistrerActivite(constructActiviteEntity(request))) {
+            boolean ok = enregistrerActivite(constructActivite(request));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*try {
+           boolean ok = enregistrerActivite(constructActivite(request));
+            if(!ok) {
                 request.setAttribute("MesErreurs", "L'enregistrement a échoué");
                 destinationPage = "Erreur.htm";
             }
@@ -79,7 +86,7 @@ public class HomeController {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur.htm";
         }
-
+*/
         return new RedirectView(destinationPage);
     }
 
@@ -157,7 +164,7 @@ public class HomeController {
         return sejour;
     }
 
-    private ActiviteEntity constructActiviteEntity(HttpServletRequest request) throws ParseException {
+    private ActiviteEntity constructActivite(HttpServletRequest request) throws ParseException {
         ActiviteEntity activite = new ActiviteEntity();
         String dateLocation = request.getParameter("dateLocation");
         java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateLocation);
@@ -165,17 +172,16 @@ public class HomeController {
         String parsedDate = formatter.format(initDate);
         initDate = formatter.parse(parsedDate);
         Date dateLoc = new Date(initDate.getTime());
+        activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
         activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
         activite.setDateJour(dateLoc);
         activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
-        activite.setNbLoc(Short.parseShort(request.getParameter("nBLoc")));
-
         return activite;
     }
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
     //TODO tarif en fonction de la durée du sejour
 
-    boolean enregistrerActivite(ActiviteEntity activite) throws Exception {
+    private boolean enregistrerActivite(ActiviteEntity activite) throws Exception {
 
         boolean ok = true;
         TopicConnection connection = null;

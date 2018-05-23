@@ -9,11 +9,11 @@ import java.util.Objects;
 @Table(name = "activite", schema = "cerisaie", catalog = "")
 @IdClass(ActiviteEntityPK.class)
 public class ActiviteEntity implements Serializable {
-    private static final long serialVersionUID = -4534403211896089134L;
+   // private static final long serialVersionUID = -4534403211896089134L;
     private int codeSport;
     private Date dateJour;
     private int numSej;
-    private short nbLoc;
+    private int nbLoc;
 
     @Id
     @Column(name = "CodeSport", nullable = false)
@@ -47,11 +47,11 @@ public class ActiviteEntity implements Serializable {
 
     @Basic
     @Column(name = "NbLoc", nullable = false)
-    public short getNbLoc() {
+    public int getNbLoc() {
         return nbLoc;
     }
 
-    public void setNbLoc(short nbLoc) {
+    public void setNbLoc(int nbLoc) {
         this.nbLoc = nbLoc;
     }
 
