@@ -120,7 +120,7 @@ public class HomeController {
     public ModelAndView inscriptionClient(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         try {
-            destinationPage = "inscriptionClient";
+            destinationPage = "inscription/client";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";
@@ -131,7 +131,7 @@ public class HomeController {
     public ModelAndView inscriptionActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         try {
-            destinationPage = "inscriptionActivite";
+            destinationPage = "inscription/activite";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";

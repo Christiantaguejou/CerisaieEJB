@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "sejour", schema = "cerisaie", catalog = "")
+@Table(name = "sejours_reserves", schema = "cerisaie", catalog = "")
 public class SejourEntity {
     private int numSej;
     private Date datedebSej;
