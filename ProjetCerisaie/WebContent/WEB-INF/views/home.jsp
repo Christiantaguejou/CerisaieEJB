@@ -1,11 +1,21 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <html>
-    <head>
-        <title>JavaCodeGeeks: Spring MVC</title>
-    </head>
-    <body>
-        <h1>Welcome Spring MVC</h1>
-        <p>Hello JavaCodeGeeks!</p>
-    </body>
+<head>
+    <title>Cerisaie</title>
+    <%@ include file="includes/stylesheet.jsp" %>
+</head>
+<body>
+<%@ include file="includes/navbar.jsp" %>
+<div>
+    <div class="container">
+        <div class="form-group">
+            <label>Acceuil</label>
+            <BR> <BR>
+            <label>Bienvenue sur la page d'accueil du camping Cerisaie</label>
+        </div>
+    </div>
+</div>
+</body>
 </html>

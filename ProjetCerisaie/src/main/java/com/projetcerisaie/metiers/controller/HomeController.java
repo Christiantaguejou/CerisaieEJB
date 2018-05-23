@@ -4,6 +4,7 @@ import com.projetcerisaie.metiers.Entities.Activite;
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejourEntity;
+import com.projetcerisaie.metiers.dao.ActivityService;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
 import com.projetcerisaie.metiers.meserreurs.MonException;
 import org.springframework.stereotype.Controller;
@@ -41,9 +42,9 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value = "index.htm", method = RequestMethod.GET)
+    @RequestMapping(value = "home.htm", method = RequestMethod.GET)
     public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("index");
+        return new ModelAndView("home");
     }
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
@@ -52,6 +53,16 @@ public class HomeController {
 
         return new ModelAndView("Erreur");
     }*/
+
+    @RequestMapping(value = "planning.htm")
+    public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
+        ActivityService service = new ActivityService();
+        request.setAttribute("activities", service.listActivities());
+        if (true) {
+
+        }
+        return new ModelAndView("planning");
+    }
 
 
     @RequestMapping(value = "insererClient.htm")

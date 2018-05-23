@@ -90,7 +90,7 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>${project.artifactId}</finalName> <!-- added to remove Version from WAR file -->
+    <finalName>Cerisae</finalName> <!-- added to remove Version from WAR file -->
   </build>
 
 </project>
