@@ -5,6 +5,8 @@ import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
 import com.projetcerisaie.metiers.dao.ActivityService;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
+import com.projetcerisaie.metiers.dao.SejourService;
+import com.projetcerisaie.metiers.dao.SportService;
 import com.projetcerisaie.metiers.meserreurs.MonException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -176,7 +178,8 @@ public class HomeController {
 
     private ActiviteEntity constructActivite(HttpServletRequest request) throws ParseException {
         ActiviteEntity activite = new ActiviteEntity();
-        ActivityService activityService = new ActivityService();
+        SportService sportService = new SportService();
+        SejourService sejourService =new SejourService();
         String dateLocation = request.getParameter("dateLocation");
         java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateLocation);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -184,8 +187,8 @@ public class HomeController {
         initDate = formatter.parse(parsedDate);
         Date dateLoc = new Date(initDate.getTime());
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
-        activite.setSport(activityService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
-        activite.setSport(activityService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
+        activite.setSport(sportService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
+        activite.setSejoursReservesEntity(sejourService.getSejourEntity(Integer.parseInt(request.getParameter("numSej"))));
         activite.setDateJour(dateLoc);
 //
         return activite;
