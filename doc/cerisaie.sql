@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Client :  127.0.0.1
--- GÃ©nÃ©rÃ© le :  Ven 13 Avril 2018 Ã  11:18
--- Version du serveur :  10.1.8-MariaDB
--- Version de PHP :  5.6.30
+-- Hôte : 127.0.0.1
+-- Généré le :  jeu. 24 mai 2018 à 19:19
+-- Version du serveur :  10.1.28-MariaDB
+-- Version de PHP :  7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de donnÃ©es :  `cerisaie`
+-- Base de données :  `cerisaie`
 --
 
 -- --------------------------------------------------------
@@ -27,27 +29,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `activite` (
+  `NumInscription` int(11) NOT NULL,
   `CodeSport` int(11) NOT NULL,
   `DateJour` date NOT NULL,
-  `NumSej` int(11) NOT NULL,
-  `NbLoc` smallint(6) NOT NULL
+  `NbLoc` int(6) NOT NULL,
+  `NumResa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Contenu de la table `activite`
---
-
-INSERT INTO `activite` (`CodeSport`, `DateJour`, `NumSej`, `NbLoc`) VALUES
-(1, '2012-07-05', 3, 1),
-(1, '2012-07-20', 13, 1),
-(2, '2012-07-05', 2, 1),
-(2, '2012-07-10', 7, 1),
-(2, '2012-07-15', 7, 2),
-(3, '2012-07-07', 4, 2),
-(3, '2012-07-14', 9, 3),
-(4, '2012-07-09', 5, 2),
-(5, '2012-07-07', 6, 3),
-(5, '2012-07-12', 8, 2);
 
 -- --------------------------------------------------------
 
@@ -66,7 +53,7 @@ CREATE TABLE `client` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `PieceCli`, `NumPieceCli`) VALUES
@@ -86,6 +73,17 @@ INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `Pie
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `credentials`
+--
+
+CREATE TABLE `credentials` (
+  `username` varchar(10) NOT NULL,
+  `password` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `emplacement`
 --
 
@@ -97,7 +95,7 @@ CREATE TABLE `emplacement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `emplacement`
+-- Déchargement des données de la table `emplacement`
 --
 
 INSERT INTO `emplacement` (`NumEmpl`, `CodeTypeE`, `SurfaceEmpl`, `NbPersMaxEmpl`) VALUES
@@ -118,10 +116,23 @@ INSERT INTO `emplacement` (`NumEmpl`, `CodeTypeE`, `SurfaceEmpl`, `NbPersMaxEmpl
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sejour`
+-- Structure de la table `sejours_proposes`
 --
 
-CREATE TABLE `sejour` (
+CREATE TABLE `sejours_proposes` (
+  `NumSej` int(11) NOT NULL,
+  `DateFinOffre` date NOT NULL,
+  `NumEmpl` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sejours_reserves`
+--
+
+CREATE TABLE `sejours_reserves` (
+  `numResa` int(11) NOT NULL,
   `NumSej` int(11) NOT NULL,
   `NumCli` int(11) NOT NULL,
   `NumEmpl` int(11) NOT NULL,
@@ -131,26 +142,26 @@ CREATE TABLE `sejour` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `sejour`
+-- Déchargement des données de la table `sejours_reserves`
 --
 
-INSERT INTO `sejour` (`NumSej`, `NumCli`, `NumEmpl`, `DatedebSej`, `DateFinSej`, `NbPersonnes`) VALUES
-(1, 1, 1, '2012-07-01', '2012-07-10', 4),
-(2, 2, 3, '2012-07-02', '2012-07-13', 4),
-(3, 3, 4, '2012-07-01', '2012-07-14', 4),
-(4, 4, 2, '2012-07-05', '2012-07-15', 5),
-(5, 5, 5, '2012-07-08', '2012-07-25', 8),
-(6, 6, 13, '2012-07-09', '2012-07-23', 11),
-(7, 7, 7, '2012-07-10', '2012-07-20', 6),
-(8, 8, 8, '2012-07-11', '2012-07-26', 2),
-(9, 9, 9, '2012-07-12', '2012-07-15', 3),
-(10, 10, 10, '2012-07-13', '2012-07-17', 7),
-(11, 11, 11, '2012-07-14', '2012-07-19', 6),
-(12, 12, 12, '2012-07-15', '2012-07-21', 5),
-(13, 2, 13, '2012-07-15', '2012-07-25', 14),
-(14, 3, 3, '2012-07-16', '2012-07-23', 5),
-(15, 4, 4, '2012-07-16', '2012-07-26', 4),
-(16, 5, 5, '2012-07-17', '2012-07-28', 4);
+INSERT INTO `sejours_reserves` (`numResa`, `NumSej`, `NumCli`, `NumEmpl`, `DatedebSej`, `DateFinSej`, `NbPersonnes`) VALUES
+(1, 1, 1, 1, '2012-07-01', '2012-07-10', 4),
+(2, 2, 2, 3, '2012-07-02', '2012-07-13', 4),
+(3, 3, 3, 4, '2012-07-01', '2012-07-14', 4),
+(4, 4, 4, 2, '2012-07-05', '2012-07-15', 5),
+(5, 5, 5, 5, '2012-07-08', '2012-07-25', 8),
+(6, 6, 6, 13, '2012-07-09', '2012-07-23', 11),
+(7, 7, 7, 7, '2012-07-10', '2012-07-20', 6),
+(8, 8, 8, 8, '2012-07-11', '2012-07-26', 2),
+(9, 9, 9, 9, '2012-07-12', '2012-07-15', 3),
+(10, 10, 10, 10, '2012-07-13', '2012-07-17', 7),
+(11, 11, 11, 11, '2012-07-14', '2012-07-19', 6),
+(12, 12, 12, 12, '2012-07-15', '2012-07-21', 5),
+(13, 13, 2, 13, '2012-07-15', '2012-07-25', 14),
+(14, 14, 3, 3, '2012-07-16', '2012-07-23', 5),
+(15, 15, 4, 4, '2012-07-16', '2012-07-26', 4),
+(16, 16, 5, 5, '2012-07-17', '2012-07-28', 4);
 
 -- --------------------------------------------------------
 
@@ -166,7 +177,7 @@ CREATE TABLE `sport` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `sport`
+-- Déchargement des données de la table `sport`
 --
 
 INSERT INTO `sport` (`CodeSport`, `LibelleSport`, `UniteTpsSport`, `TarifUnite`) VALUES
@@ -189,7 +200,7 @@ CREATE TABLE `type_emplacement` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
--- Contenu de la table `type_emplacement`
+-- Déchargement des données de la table `type_emplacement`
 --
 
 INSERT INTO `type_emplacement` (`CodeTypeE`, `LIBTYPEPL`, `TARIFTYPEPL`) VALUES
@@ -199,15 +210,16 @@ INSERT INTO `type_emplacement` (`CodeTypeE`, `LIBTYPEPL`, `TARIFTYPEPL`) VALUES
 (4, 'BUNGALOW', 28);
 
 --
--- Index pour les tables exportÃ©es
+-- Index pour les tables déchargées
 --
 
 --
 -- Index pour la table `activite`
 --
 ALTER TABLE `activite`
-  ADD PRIMARY KEY (`CodeSport`,`DateJour`,`NumSej`),
-  ADD KEY `NumSej` (`NumSej`);
+  ADD PRIMARY KEY (`NumInscription`),
+  ADD KEY `CodeSport` (`CodeSport`),
+  ADD KEY `NumResa` (`NumResa`);
 
 --
 -- Index pour la table `client`
@@ -223,10 +235,17 @@ ALTER TABLE `emplacement`
   ADD KEY `CodeTypeE` (`CodeTypeE`);
 
 --
--- Index pour la table `sejour`
+-- Index pour la table `sejours_proposes`
 --
-ALTER TABLE `sejour`
-  ADD PRIMARY KEY (`NumSej`),
+ALTER TABLE `sejours_proposes`
+  ADD PRIMARY KEY (`NumSej`);
+
+--
+-- Index pour la table `sejours_reserves`
+--
+ALTER TABLE `sejours_reserves`
+  ADD PRIMARY KEY (`numResa`),
+  ADD KEY `NumSej` (`NumSej`),
   ADD KEY `NumCli` (`NumCli`),
   ADD KEY `NumEmpl` (`NumEmpl`);
 
@@ -243,37 +262,43 @@ ALTER TABLE `type_emplacement`
   ADD PRIMARY KEY (`CodeTypeE`);
 
 --
--- AUTO_INCREMENT pour les tables exportÃ©es
+-- AUTO_INCREMENT pour les tables déchargées
 --
+
+--
+-- AUTO_INCREMENT pour la table `activite`
+--
+ALTER TABLE `activite`
+  MODIFY `NumInscription` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `client`
 --
 ALTER TABLE `client`
   MODIFY `NumCli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
---
--- Contraintes pour les tables exportÃ©es
---
 
 --
--- Contraintes pour la table `activite`
+-- AUTO_INCREMENT pour la table `sejours_proposes`
 --
-ALTER TABLE `activite`
-  ADD CONSTRAINT `activite_ibfk_1` FOREIGN KEY (`CodeSport`) REFERENCES `sport` (`CodeSport`),
-  ADD CONSTRAINT `activite_ibfk_2` FOREIGN KEY (`NumSej`) REFERENCES `sejour` (`NumSej`) ON DELETE CASCADE;
+ALTER TABLE `sejours_proposes`
+  MODIFY `NumSej` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `sejours_reserves`
+--
+ALTER TABLE `sejours_reserves`
+  MODIFY `numResa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Contraintes pour les tables déchargées
+--
 
 --
 -- Contraintes pour la table `emplacement`
 --
 ALTER TABLE `emplacement`
   ADD CONSTRAINT `emplacement_ibfk_1` FOREIGN KEY (`CodeTypeE`) REFERENCES `type_emplacement` (`CodeTypeE`);
-
---
--- Contraintes pour la table `sejour`
---
-ALTER TABLE `sejour`
-  ADD CONSTRAINT `sejour_ibfk_1` FOREIGN KEY (`NumCli`) REFERENCES `client` (`NumCli`),
-  ADD CONSTRAINT `sejour_ibfk_2` FOREIGN KEY (`NumEmpl`) REFERENCES `emplacement` (`NumEmpl`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

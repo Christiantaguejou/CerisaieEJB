@@ -1,15 +1,23 @@
 package com.projetcerisaie.metiers.Entities;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "credentials", schema = "cerisaie", catalog = "")
 public class CredentialsEntity {
+    private int id;
     private String username;
     private String password;
+
+    @Id
+    @Column(name = "id", nullable = false, length = 10)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Basic
     @Column(name = "username", nullable = false, length = 10)
