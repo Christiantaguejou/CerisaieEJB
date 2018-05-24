@@ -5,6 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "credentials", schema = "cerisaie", catalog = "")
 public class CredentialsEntity {
+
     private String username;
     private String password;
 
