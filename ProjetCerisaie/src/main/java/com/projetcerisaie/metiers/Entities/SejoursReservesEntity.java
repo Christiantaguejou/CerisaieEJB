@@ -98,7 +98,7 @@ public class SejoursReservesEntity {
         this.emplacementEntity = emplacementEntity;
     }
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "NumSej",referencedColumnName = "NumSej",nullable = false)
     public SejoursProposesEntity getSejoursProposesEntity() {
         return sejoursProposesEntity;

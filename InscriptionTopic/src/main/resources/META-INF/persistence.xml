@@ -6,7 +6,6 @@
         <class>metier.ActiviteEntity</class>
         <class>metier.ClientEntity</class>
         <class>metier.EmplacementEntity</class>
-        <class>metier.SejourEntity</class>
         <class>metier.SportEntity</class>
         <class>metier.TypeEmplacementEntity</class>
         <class>metier.CredentialsEntity</class>
