@@ -9,7 +9,7 @@ import java.util.Objects;
 public class ActiviteEntityPK implements Serializable {
     private int codeSport;
     private Date dateJour;
-    private int numSej;
+    private int numResa;
 
     @Column(name = "CodeSport", nullable = false)
     @Id
@@ -31,14 +31,14 @@ public class ActiviteEntityPK implements Serializable {
         this.dateJour = dateJour;
     }
 
-    @Column(name = "NumSej", nullable = false)
+    @Column(name = "NumResa", nullable = false)
     @Id
-    public int getNumSej() {
-        return numSej;
+    public int getNumResa() {
+        return numResa;
     }
 
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
+    public void setNumResa(int numSej) {
+        this.numResa = numSej;
     }
 
     @Override
@@ -47,13 +47,13 @@ public class ActiviteEntityPK implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         ActiviteEntityPK that = (ActiviteEntityPK) o;
         return codeSport == that.codeSport &&
-                numSej == that.numSej &&
+                numResa == that.numResa &&
                 Objects.equals(dateJour, that.dateJour);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(codeSport, dateJour, numSej);
+        return Objects.hash(codeSport, dateJour, numResa);
     }
 }

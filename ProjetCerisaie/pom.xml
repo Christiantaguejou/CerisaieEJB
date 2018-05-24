@@ -89,7 +89,7 @@
         </configuration>
       </plugin>
     </plugins>
-    <finalName>Cerisae</finalName> <!-- added to remove Version from WAR file -->
+    <finalName>Cerisaie</finalName> <!-- added to remove Version from WAR file -->
   </build>
 
 </project>

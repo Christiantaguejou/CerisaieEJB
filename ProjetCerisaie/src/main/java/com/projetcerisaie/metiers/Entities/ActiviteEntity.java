@@ -12,7 +12,7 @@ public class ActiviteEntity implements Serializable {
    // private static final long serialVersionUID = -4534403211896089134L;
     private int codeSport;
     private Date dateJour;
-    private int numSej;
+    private int numResa;
     private int nbLoc;
 //TODO ajouter col num client
     @Id
@@ -36,13 +36,13 @@ public class ActiviteEntity implements Serializable {
     }
 
     @Id
-    @Column(name = "NumSej", nullable = false)
-    public int getNumSej() {
-        return numSej;
+    @Column(name = "NumResa", nullable = false)
+    public int getNumResa() {
+        return numResa;
     }
 
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
+    public void setNumResa(int numSej) {
+        this.numResa = numSej;
     }
 
     @Basic
@@ -61,7 +61,7 @@ public class ActiviteEntity implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         ActiviteEntity that = (ActiviteEntity) o;
         return codeSport == that.codeSport &&
-                numSej == that.numSej &&
+                numResa == that.numResa &&
                 nbLoc == that.nbLoc &&
                 Objects.equals(dateJour, that.dateJour);
     }
@@ -69,6 +69,6 @@ public class ActiviteEntity implements Serializable {
     @Override
     public int hashCode() {
 
-        return Objects.hash(codeSport, dateJour, numSej, nbLoc);
+        return Objects.hash(codeSport, dateJour, numResa, nbLoc);
     }
 }

@@ -39,7 +39,7 @@ public class ActivityService extends EntityService {
         Map<Integer, SportEntity> sportEntityMap = new HashMap<>();
         for (ActiviteEntity entity : entities) {
             int idSport = entity.getCodeSport();
-            int idSejour = entity.getNumSej();
+            int idSejour = entity.getNumResa();
             SejourEntity sejour;
             SportEntity sport;
             if (sejourEntityMap.containsKey(idSejour)) {

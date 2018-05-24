@@ -1,6 +1,5 @@
 package com.projetcerisaie.metiers.controller;
 
-import com.projetcerisaie.metiers.Entities.Activite;
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejourEntity;
@@ -186,7 +185,7 @@ public class HomeController {
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
         activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
         activite.setDateJour(dateLoc);
-        activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
+        activite.setNumResa(Integer.parseInt(request.getParameter("numSej")));
         return activite;
     }
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
