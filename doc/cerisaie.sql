@@ -77,6 +77,7 @@ INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `Pie
 --
 
 CREATE TABLE `credentials` (
+  `id` int AUTO_INCREMENT PRIMARY KEY
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

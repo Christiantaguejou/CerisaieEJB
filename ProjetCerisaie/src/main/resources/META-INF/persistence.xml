@@ -4,12 +4,13 @@
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.projetcerisaie.metiers.Entities.ActiviteEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.ClientEntity</class>
         <class>com.projetcerisaie.metiers.Entities.EmplacementEntity</class>
-        <class>com.projetcerisaie.metiers.Entities.SejourEntity</class>
-        <class>com.projetcerisaie.metiers.Entities.OffreEntity</class>
         <class>com.projetcerisaie.metiers.Entities.SportEntity</class>
         <class>com.projetcerisaie.metiers.Entities.TypeEmplacementEntity</class>
-        <class>com.projetcerisaie.metiers.Entities.ClientEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.CredentialsEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.SejoursProposesEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.SejoursReservesEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/cerisaie"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
