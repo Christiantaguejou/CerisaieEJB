@@ -54,7 +54,8 @@ public class InscriptionActiviteBean implements MessageListener {
                 System.out.println("dans le bean 1");
                 ObjectMessage objectMessage = (ObjectMessage) message;
                 System.out.println("dans le bean 2");
-                ActiviteEntity uneInscription = (ActiviteEntity) objectMessage.getObject();
+                ActiviteEntity uneInscription = new ActiviteEntity();
+                uneInscription = (ActiviteEntity) objectMessage.getObject();
                 try {
                     // on construit un objet Entity
                    /* ActiviteEntity uneInsEntity = new ActiviteEntity();

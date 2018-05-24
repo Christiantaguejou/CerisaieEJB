@@ -14,7 +14,7 @@ public class ActiviteEntity implements Serializable {
     private Date dateJour;
     private int numSej;
     private int nbLoc;
-
+//TODO ajouter col num client
     @Id
     @Column(name = "CodeSport", nullable = false)
     public int getCodeSport() {
