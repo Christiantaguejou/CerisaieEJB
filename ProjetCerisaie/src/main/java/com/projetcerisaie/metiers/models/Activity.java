@@ -3,14 +3,14 @@ import com.projetcerisaie.metiers.Entities.*;
 
 public class Activity {
     private ActiviteEntity activityEntity;
-    private SejourEntity sejourEntity;
+    private SejoursReservesEntity sejourEntity;
     private SportEntity sportEntity;
 
     public Activity() {
 
     }
 
-    public Activity(ActiviteEntity activityEntity, SejourEntity sejourEntity, SportEntity sportEntity) {
+    public Activity(ActiviteEntity activityEntity, SejoursReservesEntity sejourEntity, SportEntity sportEntity) {
         this.activityEntity = activityEntity;
         this.sejourEntity = sejourEntity;
         this.sportEntity = sportEntity;
@@ -27,11 +27,11 @@ public class Activity {
         this.activityEntity = activityEntity;
     }
 
-    public SejourEntity getSejourEntity() {
+    public SejoursReservesEntity getSejourEntity() {
         return sejourEntity;
     }
 
-    public void setSejourEntity(SejourEntity sejourEntity) {
+    public void setSejourEntity(SejoursReservesEntity sejourEntity) {
         this.sejourEntity = sejourEntity;
     }
 

@@ -1,5 +1,8 @@
 package com.projetcerisaie.metiers.dao;
 
+import com.projetcerisaie.metiers.Entities.ActiviteEntity;
+import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
+import com.projetcerisaie.metiers.Entities.SportEntity;
 import com.projetcerisaie.metiers.models.Activity;
 
 import javax.persistence.EntityTransaction;
@@ -32,12 +35,12 @@ public class ActivityService extends EntityService {
     public List<Activity> parseToActivity(List<ActiviteEntity> entities) {
         List<Activity> activities = new ArrayList<>();
         // On fait des hashmap pour éviter d'aller chercher deux fois la même valeur dans la bd
-        Map<Integer, SejourEntity> sejourEntityMap = new HashMap<>();
+        Map<Integer, SejoursReservesEntity> sejourEntityMap = new HashMap<>();
         Map<Integer, SportEntity> sportEntityMap = new HashMap<>();
         for (ActiviteEntity entity : entities) {
-            int idSport = entity.getCodeSport();
-            int idSejour = entity.getNumSej();
-            SejourEntity sejour;
+            int idSport = entity.getSport().getCodeSport();
+            int idSejour = entity.getSejoursReservesEntity().getNumResa();
+            SejoursReservesEntity sejour;
             SportEntity sport;
             if (sejourEntityMap.containsKey(idSejour)) {
                 sejour = sejourEntityMap.get(idSejour);
@@ -56,10 +59,10 @@ public class ActivityService extends EntityService {
         return activities;
     }
 
-    public SejourEntity getSejourEntity(int id) {
+    public SejoursReservesEntity getSejourEntity(int id) {
         EntityTransaction transaction = startTransaction();
         transaction.begin();
-        SejourEntity sejour = entitymanager.find(SejourEntity.class, id);
+        SejoursReservesEntity sejour = entitymanager.find(SejoursReservesEntity.class, id);
         transaction.commit();
         entitymanager.close();
         return sejour;

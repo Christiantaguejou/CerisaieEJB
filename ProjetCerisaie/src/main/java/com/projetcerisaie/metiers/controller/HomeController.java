@@ -185,7 +185,7 @@ public class HomeController {
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
        // activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
         activite.setDateJour(dateLoc);
-       // activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
+//
         return activite;
     }
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
