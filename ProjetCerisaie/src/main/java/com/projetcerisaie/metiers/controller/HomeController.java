@@ -1,6 +1,8 @@
 package com.projetcerisaie.metiers.controller;
 
+import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
+import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
 import com.projetcerisaie.metiers.dao.ActivityService;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
 import com.projetcerisaie.metiers.meserreurs.MonException;
@@ -166,8 +168,8 @@ public class HomeController {
         return client;
     }
 
-    private SejourEntity constructSejourEntity(HttpServletRequest request) {
-        SejourEntity sejour = new SejourEntity();
+    private SejoursReservesEntity constructSejourEntity(HttpServletRequest request) {
+        SejoursReservesEntity sejour = new SejoursReservesEntity();
 
         return sejour;
     }
@@ -181,9 +183,9 @@ public class HomeController {
         initDate = formatter.parse(parsedDate);
         Date dateLoc = new Date(initDate.getTime());
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
-        activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
+       // activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
         activite.setDateJour(dateLoc);
-        activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
+       // activite.setNumSej(Integer.parseInt(request.getParameter("numSej")));
         return activite;
     }
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
