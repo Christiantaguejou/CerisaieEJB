@@ -1,30 +1,29 @@
 package metier;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "activite", schema = "cerisaie", catalog = "")
-@IdClass(ActiviteEntityPK.class)
-public class ActiviteEntity implements Serializable {
-    //private static final long serialVersionUID = -4534403211896089134L;
-    private int codeSport;
+public class ActiviteEntity {
+    private int numInscription;
+    private SportEntity sport;
     private Date dateJour;
-    private int numSej;
     private int nbLoc;
+    private SejoursReservesEntity sejoursReservesEntity;
+
 
     @Id
-    @Column(name = "CodeSport", nullable = false)
-    public int getCodeSport() {
-        return codeSport;
+    @Column(name = "NumInscription", nullable = false)
+    public int getNumInscription() {
+        return numInscription;
     }
 
-    public void setCodeSport(int codeSport) {
-        this.codeSport = codeSport;
+    public void setNumInscription(int numInscription) {
+        this.numInscription = numInscription;
     }
 
-    @Id
+    @Basic
     @Column(name = "DateJour", nullable = false)
     public Date getDateJour() {
         return dateJour;
@@ -32,16 +31,6 @@ public class ActiviteEntity implements Serializable {
 
     public void setDateJour(Date dateJour) {
         this.dateJour = dateJour;
-    }
-
-    @Id
-    @Column(name = "NumSej", nullable = false)
-    public int getNumSej() {
-        return numSej;
-    }
-
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
     }
 
     @Basic
@@ -54,6 +43,7 @@ public class ActiviteEntity implements Serializable {
         this.nbLoc = nbLoc;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -61,8 +51,7 @@ public class ActiviteEntity implements Serializable {
 
         ActiviteEntity that = (ActiviteEntity) o;
 
-        if (codeSport != that.codeSport) return false;
-        if (numSej != that.numSej) return false;
+        if (numInscription != that.numInscription) return false;
         if (nbLoc != that.nbLoc) return false;
         if (dateJour != null ? !dateJour.equals(that.dateJour) : that.dateJour != null) return false;
 
@@ -71,10 +60,32 @@ public class ActiviteEntity implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = codeSport;
+        int result = numInscription;
         result = 31 * result + (dateJour != null ? dateJour.hashCode() : 0);
-        result = 31 * result + numSej;
         result = 31 * result + nbLoc;
         return result;
     }
+
+
+    @ManyToOne
+    @JoinColumn(name = "CodeSport",referencedColumnName = "CodeSport",nullable = false)
+    public SportEntity getSport() {
+        return sport;
+    }
+
+    public void setSport(SportEntity sport) {
+        this.sport = sport;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "NumResa",referencedColumnName = "NumResa",nullable = false)
+    public SejoursReservesEntity getSejoursReservesEntity() {
+        return sejoursReservesEntity;
+    }
+
+    public void setSejoursReservesEntity(SejoursReservesEntity sejoursReservesEntity) {
+        this.sejoursReservesEntity = sejoursReservesEntity;
+    }
+
+
 }

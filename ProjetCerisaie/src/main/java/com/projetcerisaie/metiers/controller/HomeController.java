@@ -1,9 +1,6 @@
 package com.projetcerisaie.metiers.controller;
 
-import com.projetcerisaie.metiers.Entities.Activite;
-import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
-import com.projetcerisaie.metiers.Entities.SejourEntity;
 import com.projetcerisaie.metiers.dao.ActivityService;
 import com.projetcerisaie.metiers.dao.GeneralOperations;
 import com.projetcerisaie.metiers.meserreurs.MonException;

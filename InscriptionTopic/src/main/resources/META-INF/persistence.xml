@@ -9,6 +9,9 @@
         <class>metier.SejourEntity</class>
         <class>metier.SportEntity</class>
         <class>metier.TypeEmplacementEntity</class>
+        <class>metier.CredentialsEntity</class>
+        <class>metier.SejoursProposesEntity</class>
+        <class>metier.SejoursReservesEntity</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/cerisaie"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

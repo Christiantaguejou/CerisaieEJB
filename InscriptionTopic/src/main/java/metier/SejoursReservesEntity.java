@@ -4,22 +4,26 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "sejour", schema = "cerisaie", catalog = "")
-public class SejourEntity {
-    private int numSej;
+@Table(name = "sejours_reserves", schema = "cerisaie", catalog = "")
+public class SejoursReservesEntity {
+    private int numResa;
+    private SejoursProposesEntity sejoursProposesEntity;
+    private ClientEntity clientEntity;
+    private EmplacementEntity emplacementEntity;
     private Date datedebSej;
     private Date dateFinSej;
     private int nbPersonnes;
 
     @Id
-    @Column(name = "NumSej", nullable = false)
-    public int getNumSej() {
-        return numSej;
+    @Column(name = "numResa", nullable = false)
+    public int getNumResa() {
+        return numResa;
     }
 
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
+    public void setNumResa(int numResa) {
+        this.numResa = numResa;
     }
+
 
     @Basic
     @Column(name = "DatedebSej", nullable = false)
@@ -56,9 +60,9 @@ public class SejourEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SejourEntity that = (SejourEntity) o;
+        SejoursReservesEntity that = (SejoursReservesEntity) o;
 
-        if (numSej != that.numSej) return false;
+        if (numResa != that.numResa) return false;
         if (nbPersonnes != that.nbPersonnes) return false;
         if (datedebSej != null ? !datedebSej.equals(that.datedebSej) : that.datedebSej != null) return false;
         if (dateFinSej != null ? !dateFinSej.equals(that.dateFinSej) : that.dateFinSej != null) return false;
@@ -68,10 +72,39 @@ public class SejourEntity {
 
     @Override
     public int hashCode() {
-        int result = numSej;
+        int result = numResa;
         result = 31 * result + (datedebSej != null ? datedebSej.hashCode() : 0);
         result = 31 * result + (dateFinSej != null ? dateFinSej.hashCode() : 0);
         result = 31 * result + nbPersonnes;
         return result;
+    }
+    @ManyToOne
+    @JoinColumn(name = "NumCli",referencedColumnName = "NumCli",nullable = false)
+    public ClientEntity getClientEntity() {
+        return clientEntity;
+    }
+
+    public void setClientEntity(ClientEntity clientEntity) {
+        this.clientEntity = clientEntity;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "NumEmpl",referencedColumnName = "NumEmpl",nullable = false)
+    public EmplacementEntity getEmplacementEntity() {
+        return emplacementEntity;
+    }
+
+    public void setEmplacementEntity(EmplacementEntity emplacementEntity) {
+        this.emplacementEntity = emplacementEntity;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "NumSej",referencedColumnName = "NumSej",nullable = false)
+    public SejoursProposesEntity getSejoursProposesEntity() {
+        return sejoursProposesEntity;
+    }
+
+    public void setSejoursProposesEntity(SejoursProposesEntity sejoursProposesEntity) {
+        this.sejoursProposesEntity = sejoursProposesEntity;
     }
 }

@@ -6,6 +6,7 @@
         <class>com.projetcerisaie.metiers.Entities.ActiviteEntity</class>
         <class>com.projetcerisaie.metiers.Entities.EmplacementEntity</class>
         <class>com.projetcerisaie.metiers.Entities.SejourEntity</class>
+        <class>com.projetcerisaie.metiers.Entities.OffreEntity</class>
         <class>com.projetcerisaie.metiers.Entities.SportEntity</class>
         <class>com.projetcerisaie.metiers.Entities.TypeEmplacementEntity</class>
         <class>com.projetcerisaie.metiers.Entities.ClientEntity</class>

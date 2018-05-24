@@ -1,8 +1,5 @@
 package com.projetcerisaie.metiers.dao;
 
-import com.projetcerisaie.metiers.Entities.ActiviteEntity;
-import com.projetcerisaie.metiers.Entities.SejourEntity;
-import com.projetcerisaie.metiers.Entities.SportEntity;
 import com.projetcerisaie.metiers.models.Activity;
 
 import javax.persistence.EntityTransaction;

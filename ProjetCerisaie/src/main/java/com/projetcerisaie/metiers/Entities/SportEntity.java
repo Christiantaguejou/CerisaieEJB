@@ -1,7 +1,6 @@
 package com.projetcerisaie.metiers.Entities;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "sport", schema = "cerisaie", catalog = "")
@@ -55,16 +54,24 @@ public class SportEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         SportEntity that = (SportEntity) o;
-        return codeSport == that.codeSport &&
-                tarifUnite == that.tarifUnite &&
-                Objects.equals(libelleSport, that.libelleSport) &&
-                Objects.equals(uniteTpsSport, that.uniteTpsSport);
+
+        if (codeSport != that.codeSport) return false;
+        if (tarifUnite != that.tarifUnite) return false;
+        if (libelleSport != null ? !libelleSport.equals(that.libelleSport) : that.libelleSport != null) return false;
+        if (uniteTpsSport != null ? !uniteTpsSport.equals(that.uniteTpsSport) : that.uniteTpsSport != null)
+            return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(codeSport, libelleSport, uniteTpsSport, tarifUnite);
+        int result = codeSport;
+        result = 31 * result + (libelleSport != null ? libelleSport.hashCode() : 0);
+        result = 31 * result + (uniteTpsSport != null ? uniteTpsSport.hashCode() : 0);
+        result = 31 * result + tarifUnite;
+        return result;
     }
 }

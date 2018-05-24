@@ -2,39 +2,28 @@ package com.projetcerisaie.metiers.Entities;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "sejours_reserves", schema = "cerisaie", catalog = "")
-public class SejourEntity {
-    private int numSej;
+public class SejoursReservesEntity {
+    private int numResa;
+    private SejoursProposesEntity sejoursProposesEntity;
+    private ClientEntity clientEntity;
+    private EmplacementEntity emplacementEntity;
     private Date datedebSej;
     private Date dateFinSej;
     private int nbPersonnes;
 
-    private ClientEntity clientEntity;
-    private EmplacementEntity emplacementEntity;
-
-    public SejourEntity(Date datedebSej, Date dateFinSej, int nbPersonnes,ClientEntity clientEntity,EmplacementEntity emplacementEntity) {
-        this.datedebSej = datedebSej;
-        this.dateFinSej = dateFinSej;
-        this.nbPersonnes = nbPersonnes;
-        this.clientEntity=clientEntity;
-        this.emplacementEntity=emplacementEntity;
-    }
-//TODO effectuer le mapping des clés etrangères
-    public SejourEntity() {
-    }
-
     @Id
-    @Column(name = "NumSej", nullable = false)
-    public int getNumSej() {
-        return numSej;
+    @Column(name = "numResa", nullable = false)
+    public int getNumResa() {
+        return numResa;
     }
 
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
+    public void setNumResa(int numResa) {
+        this.numResa = numResa;
     }
+
 
     @Basic
     @Column(name = "DatedebSej", nullable = false)
@@ -70,19 +59,25 @@ public class SejourEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SejourEntity that = (SejourEntity) o;
-        return numSej == that.numSej &&
-                nbPersonnes == that.nbPersonnes &&
-                Objects.equals(datedebSej, that.datedebSej) &&
-                Objects.equals(dateFinSej, that.dateFinSej);
+
+        SejoursReservesEntity that = (SejoursReservesEntity) o;
+
+        if (numResa != that.numResa) return false;
+        if (nbPersonnes != that.nbPersonnes) return false;
+        if (datedebSej != null ? !datedebSej.equals(that.datedebSej) : that.datedebSej != null) return false;
+        if (dateFinSej != null ? !dateFinSej.equals(that.dateFinSej) : that.dateFinSej != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(numSej, datedebSej, dateFinSej, nbPersonnes);
+        int result = numResa;
+        result = 31 * result + (datedebSej != null ? datedebSej.hashCode() : 0);
+        result = 31 * result + (dateFinSej != null ? dateFinSej.hashCode() : 0);
+        result = 31 * result + nbPersonnes;
+        return result;
     }
-
     @ManyToOne
     @JoinColumn(name = "NumCli",referencedColumnName = "NumCli",nullable = false)
     public ClientEntity getClientEntity() {
@@ -103,4 +98,13 @@ public class SejourEntity {
         this.emplacementEntity = emplacementEntity;
     }
 
+    @ManyToOne
+    @JoinColumn(name = "NumSej",referencedColumnName = "NumSej",nullable = false)
+    public SejoursProposesEntity getSejoursProposesEntity() {
+        return sejoursProposesEntity;
+    }
+
+    public void setSejoursProposesEntity(SejoursProposesEntity sejoursProposesEntity) {
+        this.sejoursProposesEntity = sejoursProposesEntity;
+    }
 }
