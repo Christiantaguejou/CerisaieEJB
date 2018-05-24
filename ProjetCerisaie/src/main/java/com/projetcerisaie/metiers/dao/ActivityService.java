@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class ActivityService extends EntityService {
 
+    SportService sportService = new SportService();
+    SejourService sejourService = new SejourService();
     /**
      * Liste toutes les activités
      * @return Activity
@@ -45,36 +47,18 @@ public class ActivityService extends EntityService {
             if (sejourEntityMap.containsKey(idSejour)) {
                 sejour = sejourEntityMap.get(idSejour);
             } else {
-                sejour = getSejourEntity(idSejour);
+                sejour = sejourService.getSejourEntity(idSejour);
                 sejourEntityMap.put(idSejour, sejour);
             }
             if (sportEntityMap.containsKey(idSport)) {
                 sport = sportEntityMap.get(idSport);
             } else {
-                sport = getSportEntity(idSport);
+                sport = sportService.getSportEntity(idSport);
                 sportEntityMap.put(idSport, sport);
             }
             activities.add(new Activity(entity, sejour, sport));
         }
         return activities;
-    }
-
-    public SejoursReservesEntity getSejourEntity(int id) {
-        EntityTransaction transaction = startTransaction();
-        transaction.begin();
-        SejoursReservesEntity sejour = entitymanager.find(SejoursReservesEntity.class, id);
-        transaction.commit();
-        entitymanager.close();
-        return sejour;
-    }
-
-    public SportEntity getSportEntity(int id) {
-        EntityTransaction transaction = startTransaction();
-        transaction.begin();
-        SportEntity sport = entitymanager.find(SportEntity.class, id);
-        transaction.commit();
-        entitymanager.close();
-        return sport;
     }
 
     public List<ActiviteEntity> getActiviteEntities() {

@@ -176,6 +176,7 @@ public class HomeController {
 
     private ActiviteEntity constructActivite(HttpServletRequest request) throws ParseException {
         ActiviteEntity activite = new ActiviteEntity();
+        ActivityService activityService = new ActivityService();
         String dateLocation = request.getParameter("dateLocation");
         java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateLocation);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -183,7 +184,8 @@ public class HomeController {
         initDate = formatter.parse(parsedDate);
         Date dateLoc = new Date(initDate.getTime());
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
-       // activite.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
+        activite.setSport(activityService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
+        activite.setSport(activityService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
         activite.setDateJour(dateLoc);
 //
         return activite;
