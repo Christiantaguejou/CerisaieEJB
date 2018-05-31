@@ -39,16 +39,24 @@ public class HomeController {
     private TopicPublisher producer;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String home() {
-        return "home";
+    public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
+       beforeTask(request);
+        return new ModelAndView("home");
+    }
+
+    public void beforeTask(HttpServletRequest request){
+        SejourService service = new SejourService();
+        request.setAttribute("sejours", service.geSejoursProposes());
     }
 
     @RequestMapping(value = "home.htm", method = RequestMethod.GET)
-    public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView AfficheHome(HttpServletRequest request, HttpServletResponse response) {
+      beforeTask(request);
         return new ModelAndView("home");
     }
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
+    //TODO revoir laffichage du planning
 /*
     public ModelAndView Erreur(Object o) {
 

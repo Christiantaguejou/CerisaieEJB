@@ -7,8 +7,8 @@ import java.util.Objects;
 @Table(name = "emplacement", schema = "cerisaie", catalog = "")
 public class EmplacementEntity {
     private int numEmpl;
-    private short surfaceEmpl;
-    private short nbPersMaxEmpl;
+    private int surfaceEmpl;
+    private int nbPersMaxEmpl;
 
     private TypeEmplacementEntity typeEmplacementEntity;
 
@@ -24,21 +24,21 @@ public class EmplacementEntity {
 
     @Basic
     @Column(name = "SurfaceEmpl", nullable = false)
-    public short getSurfaceEmpl() {
+    public int getSurfaceEmpl() {
         return surfaceEmpl;
     }
 
-    public void setSurfaceEmpl(short surfaceEmpl) {
+    public void setSurfaceEmpl(int surfaceEmpl) {
         this.surfaceEmpl = surfaceEmpl;
     }
 
     @Basic
     @Column(name = "NbPersMaxEmpl", nullable = false)
-    public short getNbPersMaxEmpl() {
+    public int getNbPersMaxEmpl() {
         return nbPersMaxEmpl;
     }
 
-    public void setNbPersMaxEmpl(short nbPersMaxEmpl) {
+    public void setNbPersMaxEmpl(int nbPersMaxEmpl) {
         this.nbPersMaxEmpl = nbPersMaxEmpl;
     }
 
