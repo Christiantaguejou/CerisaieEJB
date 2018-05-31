@@ -11,9 +11,7 @@
 <div>
     <div class="container">
         <div class="form-group">
-            <label>Acceuil</label>
-            <BR> <BR>
-            <label>Bienvenue sur la page d'accueil du camping Cerisaie</label>
+            <h4>Séjours Proposés</h4>
         </div>
     </div>
 </div>

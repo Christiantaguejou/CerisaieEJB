@@ -1,12 +1,17 @@
-<nav class="navbar navbar-inverse inscription-header">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navbar.css">
+<nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a id="logo_polytech" class="navbar-brand" href="home.htm"> <img src="${pageContext.request.contextPath}/resources/images/logo.png" height="50px"></a>
+            <a class="navbar-brand" href="#">Cerisaie</a>
         </div>
         <ul class="nav navbar-nav">
-            <li class="active"><a href="home.htm">Accueil</a></li>
-            <li><a href="planning.htm">Planning</a></li>
+            <li><a href="home.jsp">Home</a></li>
+            <li><a href="planning.jsp">Planning</a></li>
+            <li><a href="#">Reservation</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
+            <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         </ul>
     </div>
 </nav>
-<br><br><br><br>
