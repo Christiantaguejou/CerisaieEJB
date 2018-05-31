@@ -9,7 +9,7 @@ public class SejoursReservesEntity {
     private int numResa;
     private SejoursProposesEntity sejoursProposesEntity;
     private ClientEntity clientEntity;
-    private EmplacementEntity emplacementEntity;
+    //private EmplacementEntity emplacementEntity;
     private Date datedebSej;
     private Date dateFinSej;
     private int nbPersonnes;
@@ -88,7 +88,7 @@ public class SejoursReservesEntity {
         this.clientEntity = clientEntity;
     }
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "NumEmpl",referencedColumnName = "NumEmpl",nullable = false)
     public EmplacementEntity getEmplacementEntity() {
         return emplacementEntity;
@@ -96,7 +96,7 @@ public class SejoursReservesEntity {
 
     public void setEmplacementEntity(EmplacementEntity emplacementEntity) {
         this.emplacementEntity = emplacementEntity;
-    }
+    }*/
 
     @ManyToOne
     @JoinColumn(name = "NumSej",referencedColumnName = "NumSej",nullable = false)

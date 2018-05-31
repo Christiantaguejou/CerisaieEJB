@@ -10,7 +10,7 @@
 <%@ include file="includes/navbar.jsp" %>
 <div>
     <div class="container">
-        <<table id="tableFilter" class="table table-striped table-hover">
+        <table id="tableFilter" class="table table-striped table-hover">
         <br/>
         <thead>
         <tr>
