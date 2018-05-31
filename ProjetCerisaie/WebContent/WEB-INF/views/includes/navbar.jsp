@@ -5,8 +5,8 @@
             <a class="navbar-brand" href="#">Cerisaie</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="home.jsp">Home</a></li>
-            <li><a href="planning.jsp">Planning</a></li>
+            <li><a href="home.htm">Home</a></li>
+            <li><a href="planning.htm">Planning</a></li>
             <li><a href="#">Reservation</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
