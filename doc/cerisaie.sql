@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 24 mai 2018 à 19:19
+-- Généré le :  jeu. 31 mai 2018 à 22:50
 -- Version du serveur :  10.1.28-MariaDB
 -- Version de PHP :  7.1.11
 
@@ -35,6 +35,22 @@ CREATE TABLE `activite` (
   `NbLoc` int(6) NOT NULL,
   `NumResa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Déchargement des données de la table `activite`
+--
+
+INSERT INTO `activite` (`NumInscription`, `CodeSport`, `DateJour`, `NbLoc`, `NumResa`) VALUES
+(1, 1, '2012-07-05', 1, 3),
+(2, 1, '2012-07-20', 1, 13),
+(3, 2, '2012-07-05', 1, 2),
+(4, 2, '2012-07-10', 1, 7),
+(5, 2, '2012-07-15', 2, 7),
+(6, 3, '2012-07-07', 2, 4),
+(7, 3, '2012-07-14', 3, 9),
+(8, 4, '2012-07-09', 2, 5),
+(9, 5, '2012-07-07', 3, 6),
+(10, 5, '2012-07-12', 2, 8);
 
 -- --------------------------------------------------------
 
@@ -77,10 +93,9 @@ INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `Pie
 --
 
 CREATE TABLE `credentials` (
-  `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
-  PRIMARY KEY (`id`)
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -127,6 +142,25 @@ CREATE TABLE `sejours_proposes` (
   `NumEmpl` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `sejours_proposes`
+--
+
+INSERT INTO `sejours_proposes` (`NumSej`, `DateFinOffre`, `NumEmpl`) VALUES
+(1, '2018-05-01', 1),
+(2, '2018-05-03', 2),
+(3, '2018-05-11', 3),
+(4, '2018-05-11', 3),
+(5, '2018-05-11', 4),
+(6, '2018-05-11', 5),
+(7, '2018-05-11', 6),
+(8, '2018-05-11', 6),
+(9, '2018-05-11', 7),
+(10, '2018-05-11', 8),
+(11, '2018-05-11', 9),
+(12, '2018-05-11', 10),
+(13, '2018-05-11', 11);
+
 -- --------------------------------------------------------
 
 --
@@ -137,7 +171,6 @@ CREATE TABLE `sejours_reserves` (
   `numResa` int(11) NOT NULL,
   `NumSej` int(11) NOT NULL,
   `NumCli` int(11) NOT NULL,
-  `NumEmpl` int(11) NOT NULL,
   `DatedebSej` date NOT NULL,
   `DateFinSej` date DEFAULT NULL,
   `NbPersonnes` int(11) NOT NULL
@@ -147,23 +180,23 @@ CREATE TABLE `sejours_reserves` (
 -- Déchargement des données de la table `sejours_reserves`
 --
 
-INSERT INTO `sejours_reserves` (`numResa`, `NumSej`, `NumCli`, `NumEmpl`, `DatedebSej`, `DateFinSej`, `NbPersonnes`) VALUES
-(1, 1, 1, 1, '2012-07-01', '2012-07-10', 4),
-(2, 2, 2, 3, '2012-07-02', '2012-07-13', 4),
-(3, 3, 3, 4, '2012-07-01', '2012-07-14', 4),
-(4, 4, 4, 2, '2012-07-05', '2012-07-15', 5),
-(5, 5, 5, 5, '2012-07-08', '2012-07-25', 8),
-(6, 6, 6, 13, '2012-07-09', '2012-07-23', 11),
-(7, 7, 7, 7, '2012-07-10', '2012-07-20', 6),
-(8, 8, 8, 8, '2012-07-11', '2012-07-26', 2),
-(9, 9, 9, 9, '2012-07-12', '2012-07-15', 3),
-(10, 10, 10, 10, '2012-07-13', '2012-07-17', 7),
-(11, 11, 11, 11, '2012-07-14', '2012-07-19', 6),
-(12, 12, 12, 12, '2012-07-15', '2012-07-21', 5),
-(13, 13, 2, 13, '2012-07-15', '2012-07-25', 14),
-(14, 14, 3, 3, '2012-07-16', '2012-07-23', 5),
-(15, 15, 4, 4, '2012-07-16', '2012-07-26', 4),
-(16, 16, 5, 5, '2012-07-17', '2012-07-28', 4);
+INSERT INTO `sejours_reserves` (`numResa`, `NumSej`, `NumCli`, `DatedebSej`, `DateFinSej`, `NbPersonnes`) VALUES
+(1, 1, 1, '2012-07-01', '2012-07-10', 4),
+(2, 2, 2, '2012-07-02', '2012-07-13', 4),
+(3, 3, 3, '2012-07-01', '2012-07-14', 4),
+(4, 4, 4, '2012-07-05', '2012-07-15', 5),
+(5, 5, 5, '2012-07-08', '2012-07-25', 8),
+(6, 6, 6, '2012-07-09', '2012-07-23', 11),
+(7, 7, 7, '2012-07-10', '2012-07-20', 6),
+(8, 8, 8, '2012-07-11', '2012-07-26', 2),
+(9, 9, 9, '2012-07-12', '2012-07-15', 3),
+(10, 10, 10, '2012-07-13', '2012-07-17', 7),
+(11, 11, 11, '2012-07-14', '2012-07-19', 6),
+(12, 12, 12, '2012-07-15', '2012-07-21', 5),
+(13, 13, 2, '2012-07-15', '2012-07-25', 14),
+(14, 14, 3, '2012-07-16', '2012-07-23', 5),
+(15, 15, 4, '2012-07-16', '2012-07-26', 4),
+(16, 16, 5, '2012-07-17', '2012-07-28', 4);
 
 -- --------------------------------------------------------
 
@@ -230,6 +263,12 @@ ALTER TABLE `client`
   ADD PRIMARY KEY (`NumCli`);
 
 --
+-- Index pour la table `credentials`
+--
+ALTER TABLE `credentials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Index pour la table `emplacement`
 --
 ALTER TABLE `emplacement`
@@ -240,7 +279,8 @@ ALTER TABLE `emplacement`
 -- Index pour la table `sejours_proposes`
 --
 ALTER TABLE `sejours_proposes`
-  ADD PRIMARY KEY (`NumSej`);
+  ADD PRIMARY KEY (`NumSej`),
+  ADD KEY `NumEmpl` (`NumEmpl`);
 
 --
 -- Index pour la table `sejours_reserves`
@@ -248,8 +288,7 @@ ALTER TABLE `sejours_proposes`
 ALTER TABLE `sejours_reserves`
   ADD PRIMARY KEY (`numResa`),
   ADD KEY `NumSej` (`NumSej`),
-  ADD KEY `NumCli` (`NumCli`),
-  ADD KEY `NumEmpl` (`NumEmpl`);
+  ADD KEY `NumCli` (`NumCli`);
 
 --
 -- Index pour la table `sport`
@@ -271,7 +310,7 @@ ALTER TABLE `type_emplacement`
 -- AUTO_INCREMENT pour la table `activite`
 --
 ALTER TABLE `activite`
-  MODIFY `NumInscription` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NumInscription` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `client`
@@ -280,10 +319,16 @@ ALTER TABLE `client`
   MODIFY `NumCli` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT pour la table `credentials`
+--
+ALTER TABLE `credentials`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT pour la table `sejours_proposes`
 --
 ALTER TABLE `sejours_proposes`
-  MODIFY `NumSej` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `NumSej` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT pour la table `sejours_reserves`
