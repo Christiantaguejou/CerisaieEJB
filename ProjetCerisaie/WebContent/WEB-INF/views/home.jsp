@@ -10,6 +10,8 @@
 <%@ include file="includes/navbar.jsp" %>
 <div>
     <div class="container">
+        <h1>Séjours proposés</h1>
+        
         <table id="tableFilter" class="table table-striped table-hover">
             <br/>
             <thead>

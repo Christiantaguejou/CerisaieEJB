@@ -1,3 +1,16 @@
 body{
     background-color: white;
 }
+
+nav a {
+    font-size: 18px;
+}
+
+.navbar-brand{
+    font-size: 30px;
+}
+
+*{
+    font-family: 'Advent Pro', sans-serif;
+
+}
