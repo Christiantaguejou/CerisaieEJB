@@ -1,15 +1,14 @@
 package metier;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "credentials", schema = "cerisaie", catalog = "")
 public class CredentialsEntity {
     private String username;
     private String password;
+    private int numCli;
+    private int id;
 
     @Basic
     @Column(name = "username", nullable = false, length = 10)
@@ -49,5 +48,25 @@ public class CredentialsEntity {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "NumCli", nullable = false)
+    public int getNumCli() {
+        return numCli;
+    }
+
+    public void setNumCli(int numCli) {
+        this.numCli = numCli;
+    }
+
+    @Id
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

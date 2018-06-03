@@ -57,6 +57,7 @@ public class HomeController {
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
     //TODO revoir laffichage du planning
+    //TODO ajouter bouton reserver sur sej proposes
 /*
     public ModelAndView Erreur(Object o) {
 
@@ -130,6 +131,18 @@ public class HomeController {
         String destinationPage = "";
         try {
             destinationPage = "inscription/client";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping(value = "doSignIn.htm")
+    public ModelAndView authentification(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "";
+        try {
+            destinationPage = "espaceClient/pageAccueilClient";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "Erreur";

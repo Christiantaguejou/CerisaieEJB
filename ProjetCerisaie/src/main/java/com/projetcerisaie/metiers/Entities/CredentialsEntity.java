@@ -5,19 +5,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "credentials", schema = "cerisaie", catalog = "")
 public class CredentialsEntity {
-    private int id;
     private String username;
     private String password;
-
-    @Id
-    @Column(name = "id", nullable = false, length = 10)
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private ClientEntity clientEntity;
+    private int id;
 
     @Basic
     @Column(name = "username", nullable = false, length = 10)
@@ -57,5 +48,25 @@ public class CredentialsEntity {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+
+    @Id
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    @ManyToOne
+    @JoinColumn(name = "NumCli",referencedColumnName = "NumCli",nullable = false)
+    public ClientEntity getClientEntity() {
+        return clientEntity;
+    }
+
+    public void setClientEntity(ClientEntity clientEntity) {
+        this.clientEntity = clientEntity;
     }
 }
