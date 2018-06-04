@@ -64,6 +64,11 @@ public class HomeController {
         return new ModelAndView("Erreur");
     }*/
 
+    @RequestMapping(value = "login.htm", method = RequestMethod.GET)
+    public ModelAndView AfficheLogin(HttpServletRequest request, HttpServletResponse response) {
+        return new ModelAndView("login");
+    }
+
     @RequestMapping(value = "planning.htm")
     public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
         ActivityService service = new ActivityService();

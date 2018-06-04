@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>Se connecter</title>
+    <%@ include file="includes/stylesheet.jsp" %>
 </head>
 <body>
+<%@ include file="includes/navbar.jsp" %>
 <div id="body">
     <div class="panel">
         <h2>Sign In</h2>
