@@ -14,3 +14,8 @@ nav a {
     font-family: 'Advent Pro', sans-serif;
 
 }
+.btn-reserv{
+    color: #fff;
+    background-color: #82E0AA;
+    /* border-color: #4cae4c; */
+}
