@@ -176,7 +176,7 @@ th, td {
 }
 
 .column1 {
-  width: 33%;
+  width: 20%;
   padding-left: 40px;
 }
 
@@ -239,19 +239,21 @@ th, td {
 }
 
 .table100.ver2 th {
-  font-family: Lato-Bold;
-  font-size: 18px;
+  font-family: 'Advent Pro';
+  font-weight: bold;
+  font-size: 20px;
   color: #82E0AA;
   line-height: 1.4;
-
   background-color: transparent;
+  text-align: center;
 }
 
 .table100.ver2 td {
-  font-family: Lato-Regular;
-  font-size: 15px;
+  font-family: 'Advent Pro';
+  font-size: 17px;
   color: #808080;
   line-height: 1.4;
+  text-align: center;
 }
 
 .table100.ver2 .table100-body tr {

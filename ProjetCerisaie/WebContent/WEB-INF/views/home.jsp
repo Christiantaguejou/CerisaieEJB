@@ -9,33 +9,7 @@
 </head>
 <body>
 <%@ include file="includes/navbar.jsp" %>
-    <%--<div class="container">--%>
-        <%--<h1>Séjours proposés</h1>--%>
 
-        <%--<table id="tableFilter" class="table table-striped table-hover">--%>
-            <%--<br/>--%>
-            <%--<thead>--%>
-            <%--<tr>--%>
-                <%--<th onclick="sortTable(0)" class="cursorClic"><p class="glyphicon glyphicon-sort " style="display: inline"></p>  Type d'emplacement</th>--%>
-                <%--<th onclick="sortTable(1)" class="cursorClic"><p class="glyphicon glyphicon-sort " style="display: inline"></p>  Nb de pers. Max</th>--%>
-                <%--<th onclick="sortTable(2)" class="cursorClic"><p class="glyphicon glyphicon-sort " style="display: inline"></p>  Surface</th>--%>
-                <%--<th onclick="sortTable(3)" class="cursorClic"><p class="glyphicon glyphicon-sort " style="display: inline"></p>  Tarif/Nuit</th>--%>
-                <%--<th onclick="sortTable(4)" class="cursorClic"><p class="glyphicon glyphicon-sort " style="display: inline"></p>  Date de fin de l'offre</th>--%>
-            <%--</tr>--%>
-            <%--</thead>--%>
-            <%--<tbody>--%>
-            <%--<c:forEach items="${sejours}" var="item">--%>
-                <%--<tr>--%>
-                    <%--<td>${item.emplacementEntity.typeEmplacementEntity.libtypepl}</td>--%>
-                    <%--<td>${item.emplacementEntity.nbPersMaxEmpl}</td>--%>
-                    <%--<td>${item.emplacementEntity.surfaceEmpl}</td>--%>
-                    <%--<td>${item.emplacementEntity.typeEmplacementEntity.tariftypepl} euros</td>--%>
-                    <%--<td>${item.dateFinOffre}</td>--%>
-                <%--</tr>--%>
-            <%--</c:forEach>--%>
-            <%--</tbody>--%>
-        <%--</table>--%>
-    <%--</div>--%>
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-xs-12">
@@ -53,8 +27,8 @@
                                     <th class="cell100 column3">Surface</th>
                                     <th class="cell100 column4">Tarif/Nuit</th>
                                     <th class="cell100 column5">Fin de l'offre</th>
-                                    <th class="cell100 column5">Réservation</th>
-                                    </tr>
+                                    <th class="cell100 column6">Réservation</th>
+                                </tr>
                                 </thead>
                             </table>
                         </div>
@@ -69,7 +43,7 @@
                                         <td class="cell100 column3">${item.emplacementEntity.surfaceEmpl}</td>
                                         <td class="cell100 column4">${item.emplacementEntity.typeEmplacementEntity.tariftypepl} €</td>
                                         <td class="cell100 column5">${item.dateFinOffre}</td>
-                                        <td><button type="button" class="btn btn-reserv">Success</button></td>
+                                        <td><button type="button" class="btn btn-reserv" data-href="Controleur?action=modifierOeuvre&id=${item.numSej}">Reserver</button></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -91,9 +65,12 @@
             ps.update();
         })
     });
-
+</script>
+<script>
+    $('.clickable-row').click(function(){
+        window.location = $(this).data('href');
+    });
 
 </script>
-
 </body>
 </html>
