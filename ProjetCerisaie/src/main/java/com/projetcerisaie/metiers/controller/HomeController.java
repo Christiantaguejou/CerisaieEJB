@@ -57,6 +57,7 @@ public class HomeController {
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
     //TODO revoir laffichage du planning
+    //TODO ajouter bouton reserver sur sej proposes
 /*
     public ModelAndView Erreur(Object o) {
 
@@ -76,10 +77,17 @@ public class HomeController {
 
     @RequestMapping(value = "insererClient.htm")
     public View insererAdherent(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "listerAdherent.htm";
+        String destinationPage = "reservationConfirme.htm";
         try {
-            GeneralOperations generalOperations = new GeneralOperations();
-            generalOperations.insert(constructClientEntity(request));
+            ClientEntity client = constructClientEntity(request);
+            if(request.getParameter("repeatSignonPassword") ==client.getPassword() ){
+                GeneralOperations generalOperations = new GeneralOperations();
+                generalOperations.insert(client);
+            }
+            else {
+                request.setAttribute("MesErreurs", "Les deux mots de passe ne correspondent pas !");
+                destinationPage = "erreur.htm";
+            }
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur.htm";
@@ -136,6 +144,18 @@ public class HomeController {
         }
         return new ModelAndView(destinationPage);
     }
+
+    @RequestMapping(value = "doSignIn.htm")
+    public ModelAndView authentification(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "";
+        try {
+            destinationPage = "espaceClient/pageAccueilClient";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "Erreur";
+        }
+        return new ModelAndView(destinationPage);
+    }
     @RequestMapping(value = "inscriptionActivite.htm")
     public ModelAndView inscriptionActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
@@ -175,7 +195,10 @@ public class HomeController {
         client.setCpCli(Integer.parseInt(request.getParameter("codePostal")));
         client.setVilleCli(request.getParameter("ville"));
         client.setPieceCli(request.getParameter("pieceCli"));
+        client.setUsername(request.getParameter("signonLogin"));
+        client.setPassword(request.getParameter("signonPassword"));
         return client;
+        //TODO javascript pour verifier que les deux mdp sont ok
     }
 
     private SejoursReservesEntity constructSejourEntity(HttpServletRequest request) {
@@ -201,6 +224,7 @@ public class HomeController {
 //
         return activite;
     }
+
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
     //TODO tarif en fonction de la durée du sejour
 

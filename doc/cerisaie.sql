@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le :  jeu. 31 mai 2018 à 22:50
+-- Généré le :  ven. 01 juin 2018 à 00:00
 -- Version du serveur :  10.1.28-MariaDB
 -- Version de PHP :  7.1.11
 
@@ -107,8 +107,8 @@ CREATE TABLE `credentials` (
 CREATE TABLE `emplacement` (
   `NumEmpl` int(11) NOT NULL,
   `CodeTypeE` int(11) NOT NULL,
-  `SurfaceEmpl` smallint(6) NOT NULL,
-  `NbPersMaxEmpl` smallint(6) NOT NULL
+  `SurfaceEmpl` int(6) NOT NULL,
+  `NbPersMaxEmpl` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --

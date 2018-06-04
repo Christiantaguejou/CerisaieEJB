@@ -5,17 +5,36 @@
   Time: 00:41
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Inscription Client</title>
 </head>
 <body>
 <form class="form-horizontal" name='identification' method="post" action="insererClient.htm" >
     <div class="form-group">
-        <label class="col-md-4 col-xs-4">Nom de l'adhérent:</label>
+        <label class="col-md-4 col-xs-4">Nom d'utilisateur:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom de l'adhérent" required>
+            <input type="text" class="form-control" id="signonLogin" name="signonLogin" placeholder="login" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 col-xs-4">Mot de passe:</label>
+        <div class="col-md-8 col-xs-8">
+            <input type="password" class="form-control" id="signonPassword" name="signonPassword" placeholder="mot de passe" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 col-xs-4">Mot de passe (Re-tapez):</label>
+        <div class="col-md-8 col-xs-8">
+            <input type="password" class="form-control" id="repeatSignonPassword" name="repeatSignonPassword" placeholder="mot de passe" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-4 col-xs-4">Nom du Client:</label>
+        <div class="col-md-8 col-xs-8">
+            <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom de l'adhérent" value="" required>
         </div>
     </div>
     <div class="form-group">
@@ -48,7 +67,7 @@
             <input type="text" class="form-control"  id="pieceCli" name="pieceCli" placeholder="CI/PS/PC" required>
         </div>
     </div>
-    <button type="submit" class="btn btn-default">Ajouter</button>
+    <button type="submit" class="btn btn-default">S'inscrire</button>
 </form>
 </body>
 </html>
