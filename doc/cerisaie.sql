@@ -1,4 +1,4 @@
--- phpMyAdmin SQL Dump
+﻿-- phpMyAdmin SQL Dump
 -- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
@@ -65,26 +65,29 @@ CREATE TABLE `client` (
   `CpCli` int(11) NOT NULL,
   `VilleCli` varchar(50) COLLATE utf8_bin NOT NULL,
   `PieceCli` varchar(2) COLLATE utf8_bin NOT NULL,
-  `NumPieceCli` int(11) NOT NULL
+  `NumPieceCli` int(11) NOT NULL,
+  `username` varchar(12) COLLATE utf8_bin NOT NULL,
+  `password` varchar(11) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `client`
 --
 
-INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `PieceCli`, `NumPieceCli`) VALUES
-(1, 'Merle', '3 rue des lilas', 69005, 'Lyon', 'CI', 2356786),
-(2, 'Poussin', 'rue des tulipes', 69007, 'Lyon', 'CI', 347835684),
-(3, 'Rossignol', '3 rue des glaieuls', 69002, 'Lyon', 'CI', 23556645),
-(4, 'Canaris', '10 rue des acacias', 69005, 'Lyon', 'PS', 235667),
-(5, 'Piaf', '4 rue des pivoines', 69007, 'Lyon', 'PC', 347235684),
-(6, 'Rose', '5 rue des marguerites', 69160, 'Tassin', 'CI', 56947341),
-(7, 'Poussin', '20 rue des iris', 69400, 'Villefranche', 'CI', 234511),
-(8, 'Piactivitet', 'rue des pÃ©tunias', 69340, 'Francheville', 'CI', 347289),
-(9, 'Aigle', '3 rue des geraniums', 69290, 'Saint Consorce', 'CI', 234591),
-(10, 'Mesange', '10 rue des aubÃ©pines', 69290, 'Craponne', 'PS', 2398643),
-(11, 'Aactivitette', '4 rue des orchidÃ©s', 69500, 'Bron', 'PC', 34723896),
-(12, 'Buse', '5 rue des nÃ©nuphars', 69200, 'Venissieux', 'CI', 569475342);
+INSERT INTO `client` (`NumCli`, `NomCli`, `AdrRueCli`, `CpCli`, `VilleCli`, `PieceCli`, `NumPieceCli`, `username`, `password`) VALUES
+(1, 'Merle', '3 rue des lilas', 69005, 'Lyon', 'CI', 2356786, 'merle', 'merle'),
+(2, 'Poussin', 'rue des tulipes', 69007, 'Lyon', 'CI', 347835684, 'poussin', 'poussin'),
+(3, 'Rossignol', '3 rue des glaieuls', 69002, 'Lyon', 'CI', 23556645, '', '0'),
+(4, 'Canaris', '10 rue des acacias', 69005, 'Lyon', 'PS', 235667, '', '0'),
+(5, 'Piaf', '4 rue des pivoines', 69007, 'Lyon', 'PC', 347235684, '', '0'),
+(6, 'Rose', '5 rue des marguerites', 69160, 'Tassin', 'CI', 56947341, '', '0'),
+(7, 'Poussin', '20 rue des iris', 69400, 'Villefranche', 'CI', 234511, '', '0'),
+(8, 'Piactivitet', 'rue des pétunias', 69340, 'Francheville', 'CI', 347289, '', '0'),
+(9, 'Aigle', '3 rue des geraniums', 69290, 'Saint Consorce', 'CI', 234591, '', '0'),
+(10, 'Mesange', '10 rue des aubépines', 69290, 'Craponne', 'PS', 2398643, '', '0'),
+(11, 'Aactivitette', '4 rue des orchidés', 69500, 'Bron', 'PC', 34723896, '', '0'),
+(12, 'Buse', '5 rue des nénuphars', 69200, 'Venissieux', 'CI', 569475342, '', '0');
+
 
 -- --------------------------------------------------------
 
@@ -217,10 +220,10 @@ CREATE TABLE `sport` (
 
 INSERT INTO `sport` (`CodeSport`, `LibelleSport`, `UniteTpsSport`, `TarifUnite`) VALUES
 (1, 'Tennis', '1 heure', 9),
-(2, 'VTT', '1/2 journÃ©e', 15),
-(3, 'Planche-vo', '1 journÃ©e', 22),
-(4, 'PÃ©dalo', '2 heures', 8),
-(5, 'CanoÃ©', '1/2 journÃ©e', 10);
+(2, 'VTT', '1/2 journée', 15),
+(3, 'Planche-vo', '1 journée', 22),
+(4, 'Pédalo', '2 heures', 8),
+(5, 'Canoé', '1/2 journée', 10);
 
 -- --------------------------------------------------------
 
