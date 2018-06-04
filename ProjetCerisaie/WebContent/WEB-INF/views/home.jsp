@@ -32,6 +32,7 @@
                     <td>${item.emplacementEntity.typeEmplacementEntity.tariftypepl} euros</td>
                     <td>${item.dateFinOffre}</td>
                 </tr>
+                <!-- mettre les clés primaires des sejours proposés en hidden-->
             </c:forEach>
             </tbody>
         </table>
