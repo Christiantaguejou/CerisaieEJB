@@ -12,6 +12,8 @@ public class ClientEntity {
     private String villeCli;
     private String pieceCli;
     private int numPieceCli;
+    private String username;
+    private String password;
 
     @Id
     @Column(name = "NumCli", nullable = false)
@@ -111,5 +113,25 @@ public class ClientEntity {
         result = 31 * result + (pieceCli != null ? pieceCli.hashCode() : 0);
         result = 31 * result + numPieceCli;
         return result;
+    }
+
+    @Basic
+    @Column(name = "username", nullable = false, length = 12)
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Basic
+    @Column(name = "password", nullable = false, length = 11)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

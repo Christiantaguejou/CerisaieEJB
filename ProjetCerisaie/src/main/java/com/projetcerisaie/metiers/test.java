@@ -10,7 +10,7 @@ public class test {
         GeneralOperations generalOperations = new GeneralOperations();
 
         // Add Persons
-        generalOperations.insert(new ClientEntity("Bor4","12",12,"12","12",12));
+       // generalOperations.insert(new ClientEntity("Bor"));
 
     }
 }

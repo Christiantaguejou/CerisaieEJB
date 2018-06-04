@@ -1,6 +1,7 @@
 package com.projetcerisaie.metiers.dao;
 
 import com.projetcerisaie.metiers.Entities.ClientEntity;
+import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -27,5 +28,14 @@ public class ClientDaoImp extends EntityService implements ClientDao{
         transac.commit();
         entitymanager.close();
         return entitymanager.createQuery(criteriaQuery).getResultList();
+    }
+
+    public ClientEntity getClientEntity(int id) {
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        ClientEntity client = entitymanager.find(ClientEntity.class, id);
+        transaction.commit();
+        entitymanager.close();
+        return client;
     }
 }

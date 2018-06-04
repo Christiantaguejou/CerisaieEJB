@@ -77,10 +77,17 @@ public class HomeController {
 
     @RequestMapping(value = "insererClient.htm")
     public View insererAdherent(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "listerAdherent.htm";
+        String destinationPage = "reservationConfirme.htm";
         try {
-            GeneralOperations generalOperations = new GeneralOperations();
-            generalOperations.insert(constructClientEntity(request));
+            ClientEntity client = constructClientEntity(request);
+            if(request.getParameter("repeatSignonPassword") ==client.getPassword() ){
+                GeneralOperations generalOperations = new GeneralOperations();
+                generalOperations.insert(client);
+            }
+            else {
+                request.setAttribute("MesErreurs", "Les deux mots de passe ne correspondent pas !");
+                destinationPage = "erreur.htm";
+            }
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur.htm";
@@ -188,7 +195,10 @@ public class HomeController {
         client.setCpCli(Integer.parseInt(request.getParameter("codePostal")));
         client.setVilleCli(request.getParameter("ville"));
         client.setPieceCli(request.getParameter("pieceCli"));
+        client.setUsername(request.getParameter("signonLogin"));
+        client.setPassword(request.getParameter("signonPassword"));
         return client;
+        //TODO javascript pour verifier que les deux mdp sont ok
     }
 
     private SejoursReservesEntity constructSejourEntity(HttpServletRequest request) {
@@ -214,6 +224,7 @@ public class HomeController {
 //
         return activite;
     }
+
     //TODO ajouter colonne disponibilite a emplacement et penser à espace client
     //TODO tarif en fonction de la durée du sejour
 
