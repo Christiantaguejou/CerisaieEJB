@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>S'inscrire à une activité</title>
 </head>
 <body>
 <form class="form-horizontal" name='identification' method="post" action="insererActivite.htm" >

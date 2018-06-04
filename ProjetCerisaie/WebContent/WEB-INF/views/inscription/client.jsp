@@ -28,7 +28,7 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Mot de passe (Re-tapez):</label>
         <div class="col-md-8 col-xs-8">
-            <input type="password" class="form-control" id="repeatSignonPassword" name="repeatSignonPassword" placeholder="mot de passe" required>
+            <input type="password" class="form-control" id="repeatSignonPassword" name="repeatSignonPassword" placeholder="Retapez le mot de passe" required>
         </div>
     </div>
     <div class="form-group">
