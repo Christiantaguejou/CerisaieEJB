@@ -73,16 +73,24 @@ public class HomeController {
         }
         return new ModelAndView("planning");
     }
-
+    /*
+    @RequestMapping(value = "pageAccueilClient.htm")
+    public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
+                return new ModelAndView("espaceClient/pageAccueilClient");
+    }*/
 
     @RequestMapping(value = "insererClient.htm")
     public View insererAdherent(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "reservationConfirme.htm";
+        String destinationPage = "confirmeReservation.htm";
         try {
+            //si une reservation est en cours on va vers la confirmation de la resa
             ClientEntity client = constructClientEntity(request);
-            if(request.getParameter("repeatSignonPassword") ==client.getPassword() ){
+            if(client.getPassword().equals(request.getParameter("repeatSignonPassword"))){
                 GeneralOperations generalOperations = new GeneralOperations();
                 generalOperations.insert(client);
+                if(request.getParameter("NumSej").equals("")){
+                    destinationPage = "pageAccueilClient.htm";
+                }
             }
             else {
                 request.setAttribute("MesErreurs", "Les deux mots de passe ne correspondent pas !");
