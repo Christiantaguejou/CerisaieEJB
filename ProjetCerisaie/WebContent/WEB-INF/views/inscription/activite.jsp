@@ -5,12 +5,16 @@
   Time: 14:56
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>S'inscrire à une activité</title>
+    <%@ include file="../includes/stylesheet.jsp" %>
 </head>
 <body>
+<%@ include file="../includes/navbar.jsp" %>
 <form class="form-horizontal" name='identification' method="post" action="insererActivite.htm" >
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Sport:</label>

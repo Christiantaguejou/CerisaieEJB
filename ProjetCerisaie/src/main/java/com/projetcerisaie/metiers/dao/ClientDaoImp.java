@@ -38,4 +38,14 @@ public class ClientDaoImp extends EntityService implements ClientDao{
         entitymanager.close();
         return client;
     }
+
+    public ClientEntity autenticate(String user, String password){
+        ClientEntity client = null;
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        client = (ClientEntity) entitymanager.createQuery("select c from ClientEntity c where c.username = " + user + " and c.password = " + password + " order by numCli DESC").getResultList().get(0);
+        transaction.commit();
+        entitymanager.close();
+        return client;
+    }
 }
