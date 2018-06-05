@@ -177,7 +177,6 @@ th, td {
 
 .column1 {
   width: 20%;
-  padding-left: 40px;
 }
 
 .column2 {
@@ -198,7 +197,7 @@ th, td {
 
 .table100-head th {
   padding-top: 18px;
-  padding-bottom: 18px;
+  padding-bottom: 14px;
 }
 
 .table100-body td {
