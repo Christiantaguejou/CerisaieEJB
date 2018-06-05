@@ -3,10 +3,7 @@ package com.projetcerisaie.metiers.controller;
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
 import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
-import com.projetcerisaie.metiers.dao.ActivityService;
-import com.projetcerisaie.metiers.dao.GeneralOperations;
-import com.projetcerisaie.metiers.dao.SejourService;
-import com.projetcerisaie.metiers.dao.SportService;
+import com.projetcerisaie.metiers.dao.*;
 import com.projetcerisaie.metiers.meserreurs.MonException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,8 +58,13 @@ public class HomeController {
 /*
     public ModelAndView Erreur(Object o) {
 
-        return new ModelAndView("Erreur");
+        return new ModelAndView("erreur");
     }*/
+
+    @RequestMapping(value = "login.htm", method = RequestMethod.GET)
+    public ModelAndView AfficheLogin(HttpServletRequest request, HttpServletResponse response) {
+        return new ModelAndView("login");
+    }
 
     @RequestMapping(value = "planning.htm")
     public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
@@ -88,6 +90,7 @@ public class HomeController {
             if(client.getPassword().equals(request.getParameter("repeatSignonPassword"))){
                 GeneralOperations generalOperations = new GeneralOperations();
                 generalOperations.insert(client);
+                request.getSession().setAttribute("loggedInClient", client);
                 if(request.getParameter("NumSej").equals("")){
                     destinationPage = "pageAccueilClient.htm";
                 }
@@ -148,7 +151,7 @@ public class HomeController {
             destinationPage = "inscription/client";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "Erreur";
+            destinationPage = "erreur";
         }
         return new ModelAndView(destinationPage);
     }
@@ -156,14 +159,36 @@ public class HomeController {
     @RequestMapping(value = "doSignIn.htm")
     public ModelAndView authentification(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
+        ClientDaoImp clientDao = new ClientDaoImp();
         try {
+            ClientEntity client = null;
+            String login="\'" + request.getParameter("login") + "\'";
+            String mdp = "\'" + request.getParameter("password") + "\'";
+            client = clientDao.autenticate(login, mdp);
+            if(client!=null) {
+                request.getSession().setAttribute("loggedInClient", client);
+            }
             destinationPage = "espaceClient/pageAccueilClient";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "Erreur";
+            destinationPage = "erreur";
         }
         return new ModelAndView(destinationPage);
     }
+
+    @RequestMapping(value = "disconnect.htm")
+    public View disconnection(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "";
+        try {
+            request.getSession().removeAttribute("loggedInClient");
+            destinationPage = "home.htm";
+        } catch (Exception e) {
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "erreur.htm";
+        }
+        return new RedirectView(destinationPage);
+    }
+
     @RequestMapping(value = "inscriptionActivite.htm")
     public ModelAndView inscriptionActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
@@ -171,7 +196,7 @@ public class HomeController {
             destinationPage = "inscription/activite";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "Erreur";
+            destinationPage = "erreur";
         }
         return new ModelAndView(destinationPage);
     }
@@ -183,7 +208,7 @@ public class HomeController {
             destinationPage = "reservationSejour";
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "Erreur";
+            destinationPage = "erreur";
         }
         return new ModelAndView(destinationPage);
     }
@@ -192,7 +217,7 @@ public class HomeController {
     // /
     @RequestMapping(value = "erreur.htm", method = RequestMethod.GET)
     public ModelAndView AfficheErreur(HttpServletRequest request, HttpServletResponse response) {
-        return new ModelAndView("Erreur");
+        return new ModelAndView("erreur");
     }
 
     private ClientEntity constructClientEntity(HttpServletRequest request) {

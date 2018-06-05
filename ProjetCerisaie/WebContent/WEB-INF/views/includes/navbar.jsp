@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/navbar.css">
 <nav class="navbar navbar-default">
     <div class="container-fluid">
@@ -10,8 +11,14 @@
             <li><a href="#">Reservation</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="inscriptionClient.htm"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
-            <li><a href="login.jsp"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <c:if test="${empty loggedInClient}">
+                <li><a href="inscriptionClient.htm"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>
+                <li><a href="login.htm"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </c:if>
+            <c:if test="${not empty loggedInClient}">
+                <li><a active> Utilisateur ${loggedInClient.username}</a></li>
+                <li><a href="disconnect.htm"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
+            </c:if>
         </ul>
     </div>
 </nav>

@@ -10,8 +10,10 @@
 <html>
 <head>
     <title>Inscription Client</title>
+    <%@ include file="../includes/stylesheet.jsp" %>
 </head>
 <body>
+<%@ include file="../includes/navbar.jsp" %>
 <form class="form-horizontal" name='identification' method="post" action="insererClient.htm" >
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Nom d'utilisateur:</label>
