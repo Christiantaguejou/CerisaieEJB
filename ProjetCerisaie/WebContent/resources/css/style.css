@@ -30,4 +30,7 @@ nav a {
     .btn-reserv{
         font-size: 10px;
     }
+    .table100-head th{
+        padding-bottom: 0px;
+    }
 }
