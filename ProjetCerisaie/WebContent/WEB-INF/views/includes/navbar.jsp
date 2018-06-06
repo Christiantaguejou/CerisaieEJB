@@ -6,7 +6,7 @@
             <a class="navbar-brand" href="#">Cerisaie</a>
         </div>
         <ul class="nav navbar-nav" id="menus">
-            <li class="menu" ><a href="home.htm">Home</a></li>
+            <li class="menu current" ><a href="home.htm">Home</a></li>
             <li class="menu" ><a href="planning.htm">Planning</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
@@ -21,3 +21,4 @@
         </ul>
     </div>
 </nav>
+<script src="${pageContext.request.contextPath}/resources/js/fonctionsUtiles.js"></script>

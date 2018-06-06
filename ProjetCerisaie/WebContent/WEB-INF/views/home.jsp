@@ -4,8 +4,8 @@
 <html>
 <head>
     <title>Cerisaie</title>
-    <%@ include file="includes/includeTab.jsp" %>
     <%@ include file="includes/stylesheet.jsp" %>
+    <%@ include file="includes/includeTab.jsp" %>
 </head>
 <body>
 <%@ include file="includes/navbar.jsp" %>

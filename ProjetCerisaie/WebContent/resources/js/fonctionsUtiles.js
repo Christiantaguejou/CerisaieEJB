@@ -1,16 +1,24 @@
-function currentMenu() {
-// Get the container element
-    var listeMenus = document.getElementById("menus");
+/*var listeMenus = document.getElementById("menus");
 
-// Get all buttons with class="btn" inside the container
-    var menu = listeMenus.getElementsByClassName("menu");
+var menu = listeMenus.getElementsByClassName("menu");
 
-// Loop through the buttons and add the active class to the current/clicked button
-    for (var i = 0; i < menu.length; i++) {
-        menu[i].addEventListener("click", function () {
-            var current = document.getElementsByClassName("active");
-            current[0].className = current[0].className.replace(" active", "");
-            this.className += " active";
-        });
-    }
-}
+for (var i = 0; i < menu.length; i++) {
+    menu[i].addEventListener("click", function () {
+        var current = document.getElementsByClassName("current");
+        current[0].className = current[0].className.replace(" current", "");
+        this.className += " current";
+    });
+}*/
+
+/*
+    var path = window.location.pathname;
+    path = path.replace(/\/$/, "");
+    path = decodeURIComponent(path);
+
+    $(".menu").each(function () {
+        var href = $(this).attr('href');
+        if (path.substring(0, href.length) === href) {
+            $(this).closest('li').addClass('current');
+        }
+    });
+*/

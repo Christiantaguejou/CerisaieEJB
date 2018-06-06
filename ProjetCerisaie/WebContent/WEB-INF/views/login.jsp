@@ -16,54 +16,47 @@
 <body>
 <%@ include file="includes/navbar.jsp" %>
 <div id="body">
-    <div class="panel">
-        <h2>Sign In</h2>
-        <p><b>Vous avez déjà un compte ?</b></p>
-        <table cellspacing="0" cellpadding="0" width="100%" border="0" >
-            <tr>
-                <td valign="top" align="center">
-                   <form name='connexion' method="post" action="doSignIn.htm">
-                        <TABLE cellSpacing="0" cellPadding="5" border="0" >
-                            <TR>
-                                <TD align="center" colSpan="2"><B>Yes.</B></TD>
-                            </TR>
-                            <TR>
-                                <TD align="right"><B>Login :</B></TD>
-                                <TD>
-                                    <input type="text" class="form-control" id="login" name="login" placeholder="login" required>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD align="right"><B>Password:</B></TD>
-                                <TD>
-                                    <input type="password" class="form-control" id="password" name="password" placeholder="mot de passe" required>
-                                </TD>
-                            </TR>
-                            <TR>
-                                <TD align="center" colSpan="2">
-                                    <button type="submit" class="btn btn-default">Connexion</button>
-                                </TD>
-                            </TR>
-                        </TABLE>
-                   </form>
-                </td>
-                <TD vAlign="top" align="center">
-                    <form name='inscription' method="post" action="inscriptionClient.htm">
-                        <TABLE cellSpacing="0" cellPadding="5" border="0" >
-                            <TR>
-                                <TD align="center" colSpan="2">
-                                    <B>Je n'ai pas de compte. Je m'inscris</B></TD>
-                            </TR>
-                            <TR>
-                                <TD align="center" colSpan="2">
-                                    <button type="submit" class="btn btn-default">S'inscrire</button>
-                                </TD>
-                            </TR>
-                        </TABLE>
-                    </form>
-                </TD>
-            </tr>
-        </table>
+    <div class="container">
+        <div class="col-md-12 col-xs-12">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Sign In</h2>
+                </div>
+            </div>
+            <form class="form-horizontal" name='connexion' method="post" action="doSignIn.htm">
+                <p>Vous avez un compte ?</p>
+                <div class="form-group">
+                    <div class="col-md-1 col-xs-2">
+                        <label for="login"><p>Login:</p></label>
+                    </div>
+                    <div class="col-md-5 col-xs-6">
+                        <input type="login" class="form-control" id="login" name="login" placeholder="login" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-1 col-xs-2" >
+                        <label for="password"><p>Password:</p></label>
+                    </div>
+                    <div class="col-md-5 col-xs-6">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Connexion</button>
+            </form>
+
+            <div class="container">
+                <div class="page-header">
+                    <h2>Inscription</h2>
+                </div>
+            </div>
+                <form name='inscription' method="post" action="inscriptionClient.htm">
+                    <div>
+                        <p>Je n'ai pas de compte, je m'inscris</p>
+                    </div>
+                    <button type="submit" class="btn btn-default">S'inscrire</button>
+                </form>
+        </div>
     </div>
 </div>
 </body>

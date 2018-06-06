@@ -25,7 +25,8 @@
 nav a {
     font-size: 18px;
 }
-
-.active{
-    color: #333;
-}
+/*
+.current{
+    color: red;
+    background-color: red;
+}*/
