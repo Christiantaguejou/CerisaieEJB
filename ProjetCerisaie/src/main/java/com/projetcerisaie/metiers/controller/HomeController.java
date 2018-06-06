@@ -86,20 +86,28 @@ public class HomeController {
     }
 
     @RequestMapping(value = "reservationConfirme.htm")
-    public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
+    public ModelAndView reservationConfirme(HttpServletRequest request) {
         String destinationPage = "reservationConfirme";
+        try{
+            insererSejour(request);
+            request.getSession().removeAttribute("numSej");
+            request.setAttribute("detailsResa",constructSejourReserveEntity(request));
+        }catch (Exception e){
+            request.setAttribute("MesErreurs", e.getMessage());
+            destinationPage = "erreur";
+        }
         return new ModelAndView(destinationPage);
     }
-
+/*
     @RequestMapping(value = "confirmeReservation.htm")
     public ModelAndView confirmeReservation(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "confirmeReservation";
         return new ModelAndView(destinationPage);
     }
-
+*/
     @RequestMapping(value = "insererClient.htm")
     public View insererClient(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "confirmeReservation.htm";
+        String destinationPage = "confirmeReservation";
         try {
             //si une reservation est en cours on va vers la confirmation de la resa
             ClientEntity client = constructClientEntity(request);
@@ -151,19 +159,13 @@ public class HomeController {
         return new RedirectView(destinationPage);
     }
 
-
-    @RequestMapping(value = "insererSejour.htm")
-    public View insererSejour(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "listerAdherent.htm";
+    public void insererSejour(HttpServletRequest request) {
         try {
             GeneralOperations generalOperations = new GeneralOperations();
             generalOperations.insert(constructSejourReserveEntity(request));
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "erreur.htm";
         }
-
-        return new RedirectView(destinationPage);
     }
 
     @RequestMapping(value = "inscriptionClient.htm")
@@ -281,7 +283,9 @@ public class HomeController {
         sejour.setDateFinSej(convertStringToDate(request.getParameter("dateFinSejour")));
         sejour.setNbPersonnes(Integer.parseInt(request.getParameter("nbPersonnes")));
         sejour.setSejoursProposesEntity(sejourService.getSejourProposesEntity((int) request.getSession().getAttribute("numSej")));
-
+        sejour.setDateExpirationCarte(convertStringToDate(request.getParameter("dateExpiration")));
+        sejour.setNumCarteCredit(Integer.parseInt(request.getParameter("numCarteCredit")));
+        sejour.setTypeCarteCredit(request.getParameter("typeCarteCredit"));
         return sejour;
     }
 

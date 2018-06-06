@@ -91,7 +91,13 @@
                     <label>Type de Pièce d'identité:</label>
                 </div>
                 <div class="col-md-5 col-xs-6">
-                    <input type="text" class="form-control"  id="pieceCli" name="pieceCli" placeholder="CI/PS/PC" required>
+                    <div class="col-md-5 col-xs-6">
+                        <select name="pieceCli" id="pieceCli"  required>
+                            <option value="PS">PS</option>
+                            <option value="CI">CI</option>
+                            <option value="PC">PC</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <button type="submit" class="btn btn-default">S'inscrire</button>

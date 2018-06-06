@@ -9,10 +9,15 @@ public class SejoursReservesEntity {
     private int numResa;
     private SejoursProposesEntity sejoursProposesEntity;
     private ClientEntity clientEntity;
-    //private EmplacementEntity emplacementEntity;
     private Date datedebSej;
     private Date dateFinSej;
     private int nbPersonnes;
+    private int numSej;
+    private int numCli;
+    private int numCarteCredit;
+    private String typeCarteCredit;
+    private Date dateExpirationCarte;
+    private int totalTtc;
 
     @Id
     @Column(name = "numResa", nullable = false)
@@ -23,7 +28,6 @@ public class SejoursReservesEntity {
     public void setNumResa(int numResa) {
         this.numResa = numResa;
     }
-
 
     @Basic
     @Column(name = "DatedebSej", nullable = false)
@@ -78,8 +82,9 @@ public class SejoursReservesEntity {
         result = 31 * result + nbPersonnes;
         return result;
     }
+
     @ManyToOne
-    @JoinColumn(name = "NumCli",referencedColumnName = "NumCli",nullable = false)
+    @JoinColumn(name = "NumCli", referencedColumnName = "NumCli", nullable = false)
     public ClientEntity getClientEntity() {
         return clientEntity;
     }
@@ -88,23 +93,54 @@ public class SejoursReservesEntity {
         this.clientEntity = clientEntity;
     }
 
-    /*@ManyToOne
-    @JoinColumn(name = "NumEmpl",referencedColumnName = "NumEmpl",nullable = false)
-    public EmplacementEntity getEmplacementEntity() {
-        return emplacementEntity;
-    }
-
-    public void setEmplacementEntity(EmplacementEntity emplacementEntity) {
-        this.emplacementEntity = emplacementEntity;
-    }*/
-
     @ManyToOne
-    @JoinColumn(name = "NumSej",referencedColumnName = "NumSej",nullable = false)
+    @JoinColumn(name = "NumSej", referencedColumnName = "NumSej", nullable = false)
     public SejoursProposesEntity getSejoursProposesEntity() {
         return sejoursProposesEntity;
     }
 
     public void setSejoursProposesEntity(SejoursProposesEntity sejoursProposesEntity) {
         this.sejoursProposesEntity = sejoursProposesEntity;
+    }
+
+
+    @Basic
+    @Column(name = "NumCarteCredit", nullable = false)
+    public int getNumCarteCredit() {
+        return numCarteCredit;
+    }
+
+    public void setNumCarteCredit(int numCarteCredit) {
+        this.numCarteCredit = numCarteCredit;
+    }
+
+    @Basic
+    @Column(name = "TypeCarteCredit", nullable = false, length = 20)
+    public String getTypeCarteCredit() {
+        return typeCarteCredit;
+    }
+
+    public void setTypeCarteCredit(String typeCarteCredit) {
+        this.typeCarteCredit = typeCarteCredit;
+    }
+
+    @Basic
+    @Column(name = "DateExpirationCarte", nullable = false)
+    public Date getDateExpirationCarte() {
+        return dateExpirationCarte;
+    }
+
+    public void setDateExpirationCarte(Date dateExpirationCarte) {
+        this.dateExpirationCarte = dateExpirationCarte;
+    }
+
+    @Basic
+    @Column(name = "TotalTtc", nullable = false)
+    public int getTotalTtc() {
+        return totalTtc;
+    }
+
+    public void setTotalTtc(int totalTtc) {
+        this.totalTtc = totalTtc;
     }
 }
