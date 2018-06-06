@@ -23,39 +23,43 @@
                     <h2>Connexion</h2>
                 </div>
             </div>
-            <form class="form-horizontal" name='connexion' method="post" action="doSignIn.htm">
-                <p>Vous avez un compte ?</p>
-                <div class="form-group">
-                    <div class="col-md-1 col-xs-2">
-                        <label for="login">Login:</label>
+            <div class="formMarge">
+                <form class="form-horizontal" name='connexion' method="post" action="doSignIn.htm">
+                    <p>Vous avez un compte ?</p>
+                    <div class="form-group">
+                        <div class="col-md-1 col-xs-2">
+                            <label for="login">Login:</label>
+                        </div>
+                        <div class="col-md-5 col-xs-6">
+                            <input type="login" class="form-control" id="login" name="login" placeholder="login" required>
+                        </div>
                     </div>
-                    <div class="col-md-5 col-xs-6">
-                        <input type="login" class="form-control" id="login" name="login" placeholder="login" required>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="col-md-1 col-xs-2" >
-                        <label for="password">Password:</label>
+                    <div class="form-group">
+                        <div class="col-md-1 col-xs-2" >
+                            <label for="password">Password:</label>
+                        </div>
+                        <div class="col-md-5 col-xs-6">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                        </div>
                     </div>
-                    <div class="col-md-5 col-xs-6">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-default">Connexion</button>
-            </form>
+                    <button type="submit" class="btn btn-default">Connexion</button>
+                </form>
+            </div>
 
             <div class="container">
                 <div class="page-header">
                     <h2>Inscription</h2>
                 </div>
             </div>
+            <div class="formMarge">
                 <form name='inscription' method="post" action="inscriptionClient.htm">
                     <div>
                         <p>Je n'ai pas de compte, je m'inscris</p>
                     </div>
                     <button type="submit" class="btn btn-default">S'inscrire</button>
                 </form>
+            </div>
         </div>
     </div>
 </div>
