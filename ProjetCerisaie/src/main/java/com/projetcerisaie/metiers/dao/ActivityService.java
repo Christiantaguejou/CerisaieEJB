@@ -47,7 +47,7 @@ public class ActivityService extends EntityService {
             if (sejourEntityMap.containsKey(idSejour)) {
                 sejour = sejourEntityMap.get(idSejour);
             } else {
-                sejour = sejourService.getSejourEntity(idSejour);
+                sejour = sejourService.getSejourReservesEntity(idSejour);
                 sejourEntityMap.put(idSejour, sejour);
             }
             if (sportEntityMap.containsKey(idSport)) {

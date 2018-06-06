@@ -25,7 +25,7 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Date de location:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="dateLocation" name="dateLocation" placeholder="dateLocation" required>
+            <input type="date" class="form-control"  id="dateLocation" name="dateLocation" placeholder="dateLocation" required>
         </div>
     </div>
   <!--  <script>$( "#datenaissance" ).datepicker();</script> -->

@@ -18,7 +18,6 @@
 <div id="body">
     <div class="panel">
         <h2>Sign In</h2>
-
         <p><b>Vous avez déjà un compte ?</b></p>
         <table cellspacing="0" cellpadding="0" width="100%" border="0" >
             <tr>
