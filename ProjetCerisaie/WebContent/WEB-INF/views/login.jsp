@@ -20,7 +20,7 @@
         <div class="col-md-12 col-xs-12">
             <div class="container">
                 <div class="page-header">
-                    <h2>Sign In</h2>
+                    <h2>Connexion</h2>
                 </div>
             </div>
             <form class="form-horizontal" name='connexion' method="post" action="doSignIn.htm">
