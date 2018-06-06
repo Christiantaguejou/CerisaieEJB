@@ -9,3 +9,4 @@
 <script src="${pageContext.request.contextPath}/resources/js/includeTabJs/select2.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/includeTabJs/perfect-scrollbar.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/includeTabJs/main.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/tableau.css">

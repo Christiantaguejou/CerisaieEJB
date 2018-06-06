@@ -17,3 +17,15 @@
     color: black;
     background-color: transparent;
 }
+
+.navbar-brand{
+    font-size: 30px;
+}
+
+nav a {
+    font-size: 18px;
+}
+
+.active{
+    color: #333;
+}

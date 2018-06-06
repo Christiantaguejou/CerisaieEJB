@@ -5,10 +5,9 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Cerisaie</a>
         </div>
-        <ul class="nav navbar-nav">
-            <li><a href="home.htm">Home</a></li>
-            <li><a href="planning.htm">Planning</a></li>
-            <li><a href="#">Reservation</a></li>
+        <ul class="nav navbar-nav" id="menus">
+            <li class="menu" ><a href="home.htm">Home</a></li>
+            <li class="menu" ><a href="planning.htm">Planning</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <c:if test="${empty loggedInClient}">
