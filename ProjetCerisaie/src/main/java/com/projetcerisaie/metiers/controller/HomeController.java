@@ -2,6 +2,7 @@ package com.projetcerisaie.metiers.controller;
 
 import com.projetcerisaie.metiers.Entities.ActiviteEntity;
 import com.projetcerisaie.metiers.Entities.ClientEntity;
+import com.projetcerisaie.metiers.Entities.SejoursProposesEntity;
 import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
 import com.projetcerisaie.metiers.dao.*;
 import com.projetcerisaie.metiers.meserreurs.MonException;
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
 import javax.jms.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,18 +39,18 @@ public class HomeController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView Afficheindex(HttpServletRequest request, HttpServletResponse response) {
-       beforeTask(request);
+        beforeTask(request);
         return new ModelAndView("home");
     }
 
-    public void beforeTask(HttpServletRequest request){
+    public void beforeTask(HttpServletRequest request) {
         SejourService service = new SejourService();
         request.setAttribute("sejours", service.geSejoursProposes());
     }
 
     @RequestMapping(value = "home.htm", method = RequestMethod.GET)
     public ModelAndView AfficheHome(HttpServletRequest request, HttpServletResponse response) {
-      beforeTask(request);
+        beforeTask(request);
         return new ModelAndView("home");
     }
     //TODO affichage erreur
@@ -66,6 +68,13 @@ public class HomeController {
         return new ModelAndView("login");
     }
 
+    /*
+        @RequestMapping(value = "reservationConfirme.htm")
+        public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
+
+            return new ModelAndView("planning");
+        }
+    */
     @RequestMapping(value = "planning.htm")
     public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
         ActivityService service = new ActivityService();
@@ -75,27 +84,40 @@ public class HomeController {
         }
         return new ModelAndView("planning");
     }
-    /*
-    @RequestMapping(value = "pageAccueilClient.htm")
-    public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
-                return new ModelAndView("espaceClient/pageAccueilClient");
-    }*/
+
+    @RequestMapping(value = "reservationConfirme.htm")
+    public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "reservationConfirme";
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping(value = "confirmeReservation.htm")
+    public ModelAndView confirmeReservation(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "confirmeReservation";
+        return new ModelAndView(destinationPage);
+    }
 
     @RequestMapping(value = "insererClient.htm")
-    public View insererAdherent(HttpServletRequest request, HttpServletResponse response) {
+    public View insererClient(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "confirmeReservation.htm";
         try {
             //si une reservation est en cours on va vers la confirmation de la resa
             ClientEntity client = constructClientEntity(request);
-            if(client.getPassword().equals(request.getParameter("repeatSignonPassword"))){
+            if (client.getPassword().equals(request.getParameter("repeatSignonPassword"))) {
                 GeneralOperations generalOperations = new GeneralOperations();
                 generalOperations.insert(client);
                 request.getSession().setAttribute("loggedInClient", client);
-                if(request.getParameter("NumSej").equals("")){
-                    destinationPage = "pageAccueilClient.htm";
+                if (request.getSession().getAttribute("numSej") != null) {
+                    if (!request.getSession().getAttribute("numSej").equals("")) {
+                        SejourService sejourService = new SejourService();
+                        SejoursProposesEntity sejourPropose = sejourService.getSejourProposesEntity((int) request.getSession().getAttribute("numSej"));
+                        request.setAttribute("sejourProposeEntity", sejourPropose);
+                        destinationPage = "confirmeReservation";
+                    }
+                } else {
+                    destinationPage = "espaceClient/pageAccueilClient";
                 }
-            }
-            else {
+            } else {
                 request.setAttribute("MesErreurs", "Les deux mots de passe ne correspondent pas !");
                 destinationPage = "erreur.htm";
             }
@@ -135,7 +157,7 @@ public class HomeController {
         String destinationPage = "listerAdherent.htm";
         try {
             GeneralOperations generalOperations = new GeneralOperations();
-            generalOperations.insert(constructSejourEntity(request));
+            generalOperations.insert(constructSejourReserveEntity(request));
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur.htm";
@@ -160,15 +182,25 @@ public class HomeController {
     public ModelAndView authentification(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         ClientDaoImp clientDao = new ClientDaoImp();
+        HttpSession httpSession = request.getSession();
         try {
             ClientEntity client = null;
-            String login="\'" + request.getParameter("login") + "\'";
+            String login = "\'" + request.getParameter("login") + "\'";
             String mdp = "\'" + request.getParameter("password") + "\'";
             client = clientDao.autenticate(login, mdp);
-            if(client!=null) {
-                request.getSession().setAttribute("loggedInClient", client);
+            if (client != null) {
+                httpSession.setAttribute("loggedInClient", client);
             }
-            destinationPage = "espaceClient/pageAccueilClient";
+            if (httpSession.getAttribute("numSej") != null) {
+                if (!httpSession.getAttribute("numSej").equals("")) {
+                    SejourService sejourService = new SejourService();
+                    SejoursProposesEntity sejourPropose = sejourService.getSejourProposesEntity((int) httpSession.getAttribute("numSej"));
+                    request.setAttribute("sejourProposeEntity", sejourPropose);
+                    destinationPage = "confirmeReservation";
+                }
+            } else {
+                destinationPage = "espaceClient/pageAccueilClient";
+            }
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur";
@@ -201,11 +233,18 @@ public class HomeController {
         return new ModelAndView(destinationPage);
     }
 
-    @RequestMapping(value = "reservationSejour.htm",method = RequestMethod.GET)
-    public ModelAndView reservationSejour(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "";
+    @RequestMapping(value = "reservationSejour.htm")
+    public ModelAndView reservationSejour(HttpServletRequest request) {
+        String destinationPage = "login";
+        HttpSession http = request.getSession();
         try {
-            destinationPage = "reservationSejour";
+            int numSej = Integer.parseInt(request.getParameter("numSej"));
+            http.setAttribute("numSej", numSej);
+            if (http.getAttribute("loggedInClient") != null) {
+                if (!http.getAttribute("loggedInClient").equals("")) {
+                    destinationPage = "confirmeReservation";
+                }
+            }
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur";
@@ -234,27 +273,34 @@ public class HomeController {
         //TODO javascript pour verifier que les deux mdp sont ok
     }
 
-    private SejoursReservesEntity constructSejourEntity(HttpServletRequest request) {
+    private SejoursReservesEntity constructSejourReserveEntity(HttpServletRequest request) throws ParseException {
         SejoursReservesEntity sejour = new SejoursReservesEntity();
+        SejourService sejourService = new SejourService();
+        sejour.setClientEntity((ClientEntity) request.getSession().getAttribute("loggedInClient"));
+        sejour.setDatedebSej(convertStringToDate(request.getParameter("dateDebSejour")));
+        sejour.setDateFinSej(convertStringToDate(request.getParameter("dateFinSejour")));
+        sejour.setNbPersonnes(Integer.parseInt(request.getParameter("nbPersonnes")));
+        sejour.setSejoursProposesEntity(sejourService.getSejourProposesEntity((int) request.getSession().getAttribute("numSej")));
 
         return sejour;
+    }
+
+    private Date convertStringToDate(String date) throws ParseException {
+        java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String parsedDate = formatter.format(initDate);
+        initDate = formatter.parse(parsedDate);
+        return new Date(initDate.getTime());
     }
 
     private ActiviteEntity constructActivite(HttpServletRequest request) throws ParseException {
         ActiviteEntity activite = new ActiviteEntity();
         SportService sportService = new SportService();
-        SejourService sejourService =new SejourService();
-        String dateLocation = request.getParameter("dateLocation");
-        java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(dateLocation);
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String parsedDate = formatter.format(initDate);
-        initDate = formatter.parse(parsedDate);
-        Date dateLoc = new Date(initDate.getTime());
+        SejourService sejourService = new SejourService();
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
         activite.setSport(sportService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
-        activite.setSejoursReservesEntity(sejourService.getSejourEntity(Integer.parseInt(request.getParameter("numSej"))));
-        activite.setDateJour(dateLoc);
-//
+        activite.setSejoursReservesEntity(sejourService.getSejourReservesEntity(Integer.parseInt(request.getParameter("numSej"))));
+        activite.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
         return activite;
     }
 

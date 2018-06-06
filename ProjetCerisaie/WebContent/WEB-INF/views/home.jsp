@@ -10,7 +10,13 @@
 <body>
 <%@ include file="includes/navbar.jsp" %>
 
+
 <div class="container">
+    <div class="container">
+        <div class="page-header">
+            <h1>Séjours proposés</h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-xs-12">
         <div class="limiter">
@@ -43,7 +49,10 @@
                                         <td class="cell100 column3">${item.emplacementEntity.surfaceEmpl}</td>
                                         <td class="cell100 column4">${item.emplacementEntity.typeEmplacementEntity.tariftypepl} €</td>
                                         <td class="cell100 column5">${item.dateFinOffre}</td>
-                                        <td><button type="button" class="btn btn-reserv" data-href="Controleur?action=modifierOeuvre&id=${item.numSej}">Reserver</button></td>
+                                        <form action="reservationSejour.htm" method="post" id="form${item.numSej}">
+                                            <input type="hidden" id="numSej" name="numSej" value="${item.numSej}">
+                                        </form>
+                                        <td><button type="submit" form="form${item.numSej}" value="Submit" class="btn btn-reserv">Reserver</button></td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
