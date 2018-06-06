@@ -14,6 +14,11 @@
 </head>
 <body>
 <%@ include file="../includes/navbar.jsp" %>
+<div class="container">
+    <div class="page-header">
+        <h1>Inscription client</h1>
+    </div>
+</div>
 <form class="form-horizontal" name='identification' method="post" action="insererClient.htm" >
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Nom d'utilisateur:</label>

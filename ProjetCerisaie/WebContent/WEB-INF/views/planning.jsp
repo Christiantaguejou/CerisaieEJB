@@ -11,6 +11,11 @@
 <%@ include file="includes/navbar.jsp" %>
 
 <div class="container">
+    <div class="container">
+        <div class="page-header">
+            <h1>Planning</h1>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <div class="limiter">

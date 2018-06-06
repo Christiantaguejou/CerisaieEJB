@@ -15,6 +15,11 @@
 </head>
 <body>
 <%@ include file="../includes/navbar.jsp" %>
+<div class="container">
+    <div class="page-header">
+        <h1>Inscription à une activité</h1>
+    </div>
+</div>
 <form class="form-horizontal" name='identification' method="post" action="insererActivite.htm" >
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Sport:</label>

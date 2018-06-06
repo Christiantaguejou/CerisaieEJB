@@ -87,7 +87,13 @@ public class HomeController {
 
     @RequestMapping(value = "reservationConfirme.htm")
     public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "reservationReservation";
+        String destinationPage = "reservationConfirme";
+        return new ModelAndView(destinationPage);
+    }
+
+    @RequestMapping(value = "confirmeReservation.htm")
+    public ModelAndView confirmeReservation(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "confirmeReservation";
         return new ModelAndView(destinationPage);
     }
 

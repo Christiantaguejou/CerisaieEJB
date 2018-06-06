@@ -16,11 +16,16 @@
 </head>
 <body>
 <%@ include file="includes/navbar.jsp" %>
+<div class="container">
+    <div class="page-header">
+        <h1>Confirmer Réservation</h1>
+    </div>
+</div>
 <form class="form-horizontal" name='identification' method="post" action="reservationConfirme.htm">
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Nom du Client:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="nom" name="nom" value="${loggedInClient.nomCli}"  readonly>
+            <input type="text" class="form-control" id="nom" name="nom" value="${loggedInClient.nomCli}" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -32,25 +37,29 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Numéro de Pièce d'identité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="numPieceCli" name="numPieceCli" value="${loggedInClient.numPieceCli}" readonly>
+            <input type="text" class="form-control" id="numPieceCli" name="numPieceCli"
+                   value="${loggedInClient.numPieceCli}" readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Adresse:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="adresse" name="adresse" value="${loggedInClient.adrRueCli}" readonly>
+            <input type="text" class="form-control" id="adresse" name="adresse" value="${loggedInClient.adrRueCli}"
+                   readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Postal:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="codePostal" name="codePostal" value="${loggedInClient.cpCli}" readonly>
+            <input type="text" class="form-control" id="codePostal" name="codePostal" value="${loggedInClient.cpCli}"
+                   readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Type de Pièce d'identité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="pieceCli" name="pieceCli" value="${loggedInClient.pieceCli}" readonly>
+            <input type="text" class="form-control" id="pieceCli" name="pieceCli" value="${loggedInClient.pieceCli}"
+                   readonly>
         </div>
     </div>
     <div class="form-group">
@@ -71,9 +80,9 @@
         <label class="col-md-4 col-xs-4">Nombre de personnes:</label>
         <div class="col-md-8 col-xs-8">
             <select name="nbPersonnes">
-            <c:forEach var = "i" begin = "1" end = "${sejourProposeEntity.emplacementEntity.nbPersMaxEmpl}">
-                <option value="${i}">${i}</option>
-            </c:forEach>
+                <c:forEach var="i" begin="1" end="${sejourProposeEntity.emplacementEntity.nbPersMaxEmpl}">
+                    <option value="${i}">${i}</option>
+                </c:forEach>
             </select>
         </div>
     </div>
