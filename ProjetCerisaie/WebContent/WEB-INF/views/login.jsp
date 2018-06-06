@@ -27,7 +27,7 @@
                 <p>Vous avez un compte ?</p>
                 <div class="form-group">
                     <div class="col-md-1 col-xs-2">
-                        <label for="login"><p>Login:</p></label>
+                        <label for="login">Login:</label>
                     </div>
                     <div class="col-md-5 col-xs-6">
                         <input type="login" class="form-control" id="login" name="login" placeholder="login" required>
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <div class="col-md-1 col-xs-2" >
-                        <label for="password"><p>Password:</p></label>
+                        <label for="password">Password:</label>
                     </div>
                     <div class="col-md-5 col-xs-6">
                         <input type="password" class="form-control" id="password" name="password" placeholder="password" required>

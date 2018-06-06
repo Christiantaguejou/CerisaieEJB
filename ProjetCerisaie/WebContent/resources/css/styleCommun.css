@@ -7,6 +7,7 @@ body{
     font-family: 'Advent Pro', sans-serif;
 
 }
-p{
+label, p{
     font-size: 18px;
+    font-weight: normal;
 }
