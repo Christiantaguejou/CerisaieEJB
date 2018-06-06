@@ -20,37 +20,37 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Nom du Client:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="nom" name="nom" value="" value="" readonly>
+            <input type="text" class="form-control" id="nom" name="nom" value="${loggedInClient.nomCli}"  readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Ville de l'adhérent:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville de l'adhérent" readonly>
+            <input type="text" class="form-control" id="ville" name="ville" value="${loggedInClient.villeCli}" readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Numéro de Pièce d'identité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="numPieceCli" name="numPieceCli" value="" readonly>
+            <input type="text" class="form-control" id="numPieceCli" name="numPieceCli" value="${loggedInClient.numPieceCli}" readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Adresse:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="adresse" name="adresse" value="" readonly>
+            <input type="text" class="form-control" id="adresse" name="adresse" value="${loggedInClient.adrRueCli}" readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Postal:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="ex:69110" readonly>
+            <input type="text" class="form-control" id="codePostal" name="codePostal" value="${loggedInClient.cpCli}" readonly>
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Type de Pièce d'identité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="pieceCli" name="pieceCli" placeholder="CI/PS/PC" readonly>
+            <input type="text" class="form-control" id="pieceCli" name="pieceCli" value="${loggedInClient.pieceCli}" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -71,7 +71,7 @@
         <label class="col-md-4 col-xs-4">Nombre de personnes:</label>
         <div class="col-md-8 col-xs-8">
             <select name="nbPersonnes">
-            <c:forEach var = "i" begin = "1" end = ${sejourPropose.emplacementEntity.nbPersMaxEmpl}>
+            <c:forEach var = "i" begin = "1" end = "${sejourProposeEntity.emplacementEntity.nbPersMaxEmpl}">
                 <option value="${i}">${i}</option>
             </c:forEach>
             </select>
