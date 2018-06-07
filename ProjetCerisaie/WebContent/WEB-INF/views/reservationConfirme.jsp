@@ -9,8 +9,17 @@
 <html>
 <head>
     <title>Réservation Confirmée</title>
+    <%@ include file="includes/includeTab.jsp" %>
+    <%@ include file="includes/stylesheet.jsp" %>
 </head>
 <body>
-
+<%@ include file="includes/navbar.jsp" %>
+<div class="container">
+    <div class="container" align="center">
+        <div class="page-header">
+            <h1>Merci de votre réservation</h1>
+        </div>
+    </div>
+</div>
 </body>
 </html>

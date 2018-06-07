@@ -56,7 +56,6 @@ public class HomeController {
     //TODO affichage erreur
     //TODO increment Nbloc lors de prochaine loc
     //TODO revoir laffichage du planning
-    //TODO ajouter bouton reserver sur sej proposes
 /*
     public ModelAndView Erreur(Object o) {
 
@@ -91,20 +90,26 @@ public class HomeController {
         try{
             insererSejour(request);
             request.getSession().removeAttribute("numSej");
-            request.setAttribute("detailsResa",constructSejourReserveEntity(request));
+           // request.setAttribute("detailsResa",constructSejourReserveEntity(request));
         }catch (Exception e){
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur";
         }
         return new ModelAndView(destinationPage);
     }
-/*
+
     @RequestMapping(value = "confirmeReservation.htm")
     public ModelAndView confirmeReservation(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "confirmeReservation";
         return new ModelAndView(destinationPage);
     }
-*/
+
+    @RequestMapping(value = "espaceClient.htm")
+    public ModelAndView espaceClient(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "espaceClient/pageAccueilClient";
+        return new ModelAndView(destinationPage);
+    }
+
     @RequestMapping(value = "insererClient.htm")
     public View insererClient(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "confirmeReservation";
@@ -120,7 +125,7 @@ public class HomeController {
                         SejourService sejourService = new SejourService();
                         SejoursProposesEntity sejourPropose = sejourService.getSejourProposesEntity((int) request.getSession().getAttribute("numSej"));
                         request.setAttribute("sejourProposeEntity", sejourPropose);
-                        destinationPage = "confirmeReservation";
+                        destinationPage = "confirmeReservation.htm";
                     }
                 } else {
                     destinationPage = "espaceClient/pageAccueilClient";
@@ -286,6 +291,7 @@ public class HomeController {
         sejour.setDateExpirationCarte(convertStringToDate(request.getParameter("dateExpiration")));
         sejour.setNumCarteCredit(Integer.parseInt(request.getParameter("numCarteCredit")));
         sejour.setTypeCarteCredit(request.getParameter("typeCarteCredit"));
+        sejour.setTotalTtc(Integer.parseInt(request.getParameter("totalTtc")));
         return sejour;
     }
 
@@ -307,9 +313,7 @@ public class HomeController {
         activite.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
         return activite;
     }
-
-    //TODO ajouter colonne disponibilite a emplacement et penser à espace client
-    //TODO tarif en fonction de la durée du sejour
+    //TODO date de deb et fin de sejour doivent etre superieru a la date actuelle
 
     private boolean enregistrerActivite(ActiviteEntity activite) throws Exception {
 

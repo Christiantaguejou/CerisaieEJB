@@ -35,7 +35,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-3 col-xs-4">
-                    <label>Ville de l'adhérent:</label>
+                    <label>Ville :</label>
                 </div>
                 <div class="col-md-5 col-xs-6">
                     <input type="text" class="form-control" id="ville" name="ville" value="${loggedInClient.villeCli}"
@@ -163,6 +163,10 @@
         onSelect: function () {
             myfunc();
         }
+    });
+
+    $("#dateExpiration").datepicker({
+        dateFormat: 'dd/mm/yy'
     });
 
     $("#dateFinSejour").datepicker({
