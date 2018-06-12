@@ -1,4 +1,4 @@
-package metier;
+package Entities;
 
 import javax.persistence.*;
 import java.sql.Date;

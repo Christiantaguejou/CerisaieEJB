@@ -1,9 +1,7 @@
 package com.projetcerisaie.metiers.controller;
 
-import com.projetcerisaie.metiers.Entities.ActiviteEntity;
-import com.projetcerisaie.metiers.Entities.ClientEntity;
-import com.projetcerisaie.metiers.Entities.SejoursProposesEntity;
-import com.projetcerisaie.metiers.Entities.SejoursReservesEntity;
+import Entities.Inscription;
+import com.projetcerisaie.metiers.Entities.*;
 import com.projetcerisaie.metiers.dao.*;
 import com.projetcerisaie.metiers.meserreurs.MonException;
 import org.springframework.stereotype.Controller;
@@ -66,14 +64,13 @@ public class HomeController {
     public ModelAndView AfficheLogin(HttpServletRequest request, HttpServletResponse response) {
         return new ModelAndView("login");
     }
-
-    /*
-        @RequestMapping(value = "reservationConfirme.htm")
+/*
+       @RequestMapping(value = "reservationConfirme.htm")
         public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
 
             return new ModelAndView("planning");
         }
-    */
+*/
     @RequestMapping(value = "planning.htm")
     public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
         ActivityService service = new ActivityService();
@@ -295,7 +292,7 @@ public class HomeController {
         return sejour;
     }
 
-    private Date convertStringToDate(String date) throws ParseException {
+    public Date convertStringToDate(String date) throws ParseException {
         java.util.Date initDate = new SimpleDateFormat("dd/MM/yyyy").parse(date);
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String parsedDate = formatter.format(initDate);
@@ -303,19 +300,26 @@ public class HomeController {
         return new Date(initDate.getTime());
     }
 
-    private ActiviteEntity constructActivite(HttpServletRequest request) throws ParseException {
-        ActiviteEntity activite = new ActiviteEntity();
+    private Inscription constructActivite(HttpServletRequest request) throws ParseException {
+        //ActiviteEntity activite = new ActiviteEntity();
+        /*Activite activite = new Activite();
         SportService sportService = new SportService();
         SejourService sejourService = new SejourService();
         activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
-        activite.setSport(sportService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
-        activite.setSejoursReservesEntity(sejourService.getSejourReservesEntity(Integer.parseInt(request.getParameter("numSej"))));
+        activite.setCodeSport(sportService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
+        activite.setNumSej(sejourService.getSejourReservesEntity(Integer.parseInt(request.getParameter("numSej"))));
         activite.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
-        return activite;
+        return activite;*/
+        Inscription inscription = new Inscription();
+        inscription.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
+        inscription.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
+        inscription.setNumSej(Integer.parseInt(request.getParameter("numSej")));
+        inscription.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
+        return inscription;
     }
     //TODO date de deb et fin de sejour doivent etre superieru a la date actuelle
 
-    private boolean enregistrerActivite(ActiviteEntity activite) throws Exception {
+    private boolean enregistrerActivite(Inscription inscription) throws Exception {
 
         boolean ok = true;
         TopicConnection connection = null;
@@ -332,7 +336,7 @@ public class HomeController {
             // On lance la connection
             connection.start();
             ObjectMessage message = session.createObjectMessage();
-            message.setObject(activite);
+            message.setObject(inscription);
             // On publie le message
             producer.publish(message);
             producer.close();

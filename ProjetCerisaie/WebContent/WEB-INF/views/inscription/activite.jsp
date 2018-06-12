@@ -20,7 +20,7 @@
         <h1>Inscription à une activité</h1>
     </div>
 </div>
-<form class="form-horizontal" name='identification' method="post" action="insererActivite.htm" >
+<form class="form-horizontal" name='identification' method="post" action="insererActivite.htm">
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Sport:</label>
         <div class="col-md-8 col-xs-8">
@@ -30,23 +30,29 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Date de location:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="date" class="form-control"  id="dateLocation" name="dateLocation" placeholder="dateLocation" required>
+            <input type="text" class="form-control" id="dateLocation" name="dateLocation" placeholder="dateLocation"
+                   required>
         </div>
     </div>
-  <!--  <script>$( "#datenaissance" ).datepicker();</script> -->
+
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Numéro de séjour:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="numSej" name="numSej" placeholder="numSej" required>
+            <input type="text" class="form-control" id="numSej" name="numSej" placeholder="numSej" required>
         </div>
     </div>
+
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Nombre d'unité:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control"  id="nbloc" name="nbloc" placeholder="nbloc" required>
+            <input type="text" class="form-control" id="nbloc" name="nbloc" placeholder="nbloc" required>
         </div>
     </div>
+
     <button type="submit" class="btn btn-default">Ajouter</button>
 </form>
+<script>$("#dateLocation").datepicker({
+    dateFormat: 'dd/mm/yy'
+});</script>
 </body>
 </html>

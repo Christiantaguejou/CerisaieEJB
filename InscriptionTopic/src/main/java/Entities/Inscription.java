@@ -1,12 +1,12 @@
-package metier;
+
+package Entities;
+
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Activite implements Serializable {
-    public Activite() {
-    }
 
+public class Inscription implements Serializable {
     private int codeSport;
     private Date dateJour;
     private int numSej;
@@ -43,6 +43,4 @@ public class Activite implements Serializable {
     public void setNbLoc(int nbLoc) {
         this.nbLoc = nbLoc;
     }
-
-
 }

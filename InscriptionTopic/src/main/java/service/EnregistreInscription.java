@@ -3,8 +3,7 @@ package service;
 import meserreurs.MonException;
 import javax.persistence.*;
 
-import metier.ActiviteEntity;
-import metier.InscriptionEntity;
+import Entities.ActiviteEntity;
 
 public class EnregistreInscription {
 
@@ -33,8 +32,6 @@ public class EnregistreInscription {
 
         } catch (EntityNotFoundException h) {
             new MonException("Erreur d'insertion", h.getMessage());
-        } catch (Exception e) {
-            new MonException("Erreur d'insertion", e.getMessage());
         }
     }
 }

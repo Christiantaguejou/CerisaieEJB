@@ -1,11 +1,12 @@
 package com.projetcerisaie.metiers.Entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "sejours_reserves", schema = "cerisaie", catalog = "")
-public class SejoursReservesEntity {
+public class SejoursReservesEntity implements Serializable{
     private int numResa;
     private SejoursProposesEntity sejoursProposesEntity;
     private ClientEntity clientEntity;

@@ -1,11 +1,12 @@
-package metier;
+package Entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "activite", schema = "cerisaie", catalog = "")
-public class ActiviteEntity {
+public class ActiviteEntity implements Serializable {
     private int numInscription;
     private SportEntity sport;
     private Date dateJour;

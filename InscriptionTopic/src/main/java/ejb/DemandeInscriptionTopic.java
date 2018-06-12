@@ -1,7 +1,7 @@
 package ejb;
 /*
 import meserreurs.MonException;
-import metier.*;
+import Entities.*;
 
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;

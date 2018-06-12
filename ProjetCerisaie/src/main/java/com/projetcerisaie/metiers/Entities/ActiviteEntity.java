@@ -6,7 +6,7 @@ import java.sql.Date;
 
 @Entity
 @Table(name = "activite", schema = "cerisaie", catalog = "")
-public class ActiviteEntity implements Serializable {
+public class ActiviteEntity implements Serializable{
     private int numInscription;
     private SportEntity sport;
     private Date dateJour;

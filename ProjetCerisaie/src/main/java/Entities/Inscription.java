@@ -1,13 +1,14 @@
-package com.projetcerisaie.metiers.Entities;
+package Entities;
 
 import java.io.Serializable;
 import java.sql.Date;
 
-public class Activite implements Serializable {
-    public Activite() {
-    }
+public class Inscription implements Serializable {
 
     private int codeSport;
+    private Date dateJour;
+    private int numSej;
+    private int nbLoc;
 
     public int getCodeSport() {
         return codeSport;
@@ -41,7 +42,5 @@ public class Activite implements Serializable {
         this.nbLoc = nbLoc;
     }
 
-    private Date dateJour;
-    private int numSej;
-    private int nbLoc;
+
 }

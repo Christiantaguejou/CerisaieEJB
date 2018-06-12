@@ -1,11 +1,12 @@
-package metier;
+package Entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
 @Table(name = "sejours_reserves", schema = "cerisaie", catalog = "")
-public class SejoursReservesEntity {
+public class SejoursReservesEntity implements Serializable {
     private int numResa;
     private SejoursProposesEntity sejoursProposesEntity;
     private ClientEntity clientEntity;
@@ -101,26 +102,6 @@ public class SejoursReservesEntity {
 
     public void setSejoursProposesEntity(SejoursProposesEntity sejoursProposesEntity) {
         this.sejoursProposesEntity = sejoursProposesEntity;
-    }
-
-    @Basic
-    @Column(name = "NumSej", nullable = false)
-    public int getNumSej() {
-        return numSej;
-    }
-
-    public void setNumSej(int numSej) {
-        this.numSej = numSej;
-    }
-
-    @Basic
-    @Column(name = "NumCli", nullable = false)
-    public int getNumCli() {
-        return numCli;
-    }
-
-    public void setNumCli(int numCli) {
-        this.numCli = numCli;
     }
 
     @Basic

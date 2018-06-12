@@ -1,8 +1,9 @@
 package ejb;
 
 
-import meserreurs.MonException;
-import metier.*;
+import dao.SejourService;
+import dao.SportService;
+import Entities.*;
 
 import javax.annotation.Resource;
 import javax.ejb.ActivationConfigProperty;
@@ -12,11 +13,7 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
-import javax.naming.NamingException;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -51,26 +48,46 @@ public class InscriptionActiviteBean implements MessageListener {
         try {
             // On transforme le message en demande d'inscription
             if (message != null) {
-                System.out.println("dans le bean 1");
+                System.out.println("bean 1");
                 ObjectMessage objectMessage = (ObjectMessage) message;
-                System.out.println("dans le bean 2");
-                ActiviteEntity uneInscription = new ActiviteEntity();
-                uneInscription = (ActiviteEntity) objectMessage.getObject();
+                System.out.println("bean 2");
+                if(objectMessage.getObject() != null ){
+                    System.out.println("bean 3");
+                    System.out.println((objectMessage.getObject()).toString());
+                    System.out.println("bean 4");
+
+                    System.out.println("bean 5");
+                }else {
+                    System.out.println("bean 6");
+                }
+                Serializable obj = objectMessage.getObject();
+                //Inscription uneInscription = (Inscription) obj;
+               message=null;
                 try {
+                    System.out.println("bean 7");
+                    Inscription uneInscription = (Inscription) obj;
+                    System.out.println("bean 8");
                     // on construit un objet Entity
-                   /* ActiviteEntity uneInsEntity = new ActiviteEntity();
-                    // on tansfère les données reçues dans l'objet Entity
-                    uneInsEntity.setCodeSport(uneInscription.getCodeSport());
-                    uneInsEntity.setDateJour(uneInscription.getDateJour());
-                    uneInsEntity.setNbLoc(uneInscription.getNbLoc());
-                    uneInsEntity.setNumSej(uneInscription.getNumSej());*/
+                   ActiviteEntity activite = new ActiviteEntity();
+                    System.out.println("bean 9");
+                    // on transfère les données reçues dans l'objet Entity
+                    SportService sportService = new SportService();
+                    System.out.println("bean 10");
+                    SejourService sejourService = new SejourService();
+                    System.out.println("bean 11");
+                    activite.setNbLoc(uneInscription.getNbLoc());
+                    System.out.println("bean 12");
+                    activite.setSejoursReservesEntity(sejourService.getSejourReservesEntity(uneInscription.getNumSej()));
+                    System.out.println("bean 13");
+                    activite.setSport(sportService.getSportEntity(uneInscription.getCodeSport()));
+                    System.out.println("bean 14");
+                    activite.setDateJour(uneInscription.getDateJour());
+                    System.out.println("bean 15");
                     EnregistreInscription uneE = new EnregistreInscription();
-                    uneE.insertionInscription(uneInscription);
+                    System.out.println("bean 16");
+                    uneE.insertionInscription(activite);
+                    System.out.println("bean 17");
                     //uneE.insertionInscription(uneInsEntity);
-                } catch (NamingException er) {
-                    EcritureErreur(er.getMessage());
-                } catch (MonException e) {
-                    EcritureErreur(e.getMessage());
                 } catch (Exception ex) {
                     EcritureErreur(ex.getMessage());
                 }
