@@ -105,6 +105,11 @@ public class HomeController {
 
     @RequestMapping(value = "espaceClient.htm")
     public ModelAndView espaceClient(HttpServletRequest request, HttpServletResponse response) {
+        HttpSession httpSession = request.getSession();
+        ClientEntity clientSession = (ClientEntity) httpSession.getAttribute("loggedInClient");
+        SejourService sejourService = new SejourService();
+        List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
+        request.setAttribute("sejoursReserves", sejoursDuCli);
         String destinationPage = "espaceClient/pageAccueilClient";
         return new ModelAndView(destinationPage);
     }
@@ -127,6 +132,10 @@ public class HomeController {
                         destinationPage = "confirmeReservation.htm";
                     }
                 } else {
+                    ClientEntity clientSession = (ClientEntity) request.getSession().getAttribute("loggedInClient");
+                    SejourService sejourService = new SejourService();
+                    List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
+                    request.setAttribute("sejoursReserves", sejoursDuCli);
                     destinationPage = "espaceClient/pageAccueilClient";
                 }
             } else {
@@ -144,6 +153,10 @@ public class HomeController {
     @RequestMapping(value = "insererActivite.htm")
     public View insererActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "espaceClient/pageAccueilClient.htm";
+        ClientEntity clientSession = (ClientEntity) request.getSession().getAttribute("loggedInClient");
+        SejourService sejourService = new SejourService();
+        List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
+        request.setAttribute("sejoursReserves", sejoursDuCli);
         try {
             //TODO check si on est le même jour alors on incremente
             /*ActivityService activityService = new ActivityService();
@@ -204,6 +217,10 @@ public class HomeController {
                     destinationPage = "confirmeReservation";
                 }
             } else {
+                ClientEntity clientSession = (ClientEntity) httpSession.getAttribute("loggedInClient");
+                SejourService sejourService = new SejourService();
+                List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
+                request.setAttribute("sejoursReserves", sejoursDuCli);
                 destinationPage = "espaceClient/pageAccueilClient";
             }
         } catch (Exception e) {
@@ -239,6 +256,10 @@ public class HomeController {
                     request.setAttribute("sej",sejoursReservesEntity);
                     destinationPage = "inscription/activite";
                 } else {
+                    HttpSession httpSession = request.getSession();
+                    ClientEntity clientSession = (ClientEntity) httpSession.getAttribute("loggedInClient");
+                    List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
+                    request.setAttribute("sejoursReserves", sejoursDuCli);
                     destinationPage = "espaceClient/pageAccueilClient";
                 }
             } else destinationPage = "home";
