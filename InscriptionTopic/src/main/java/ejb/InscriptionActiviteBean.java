@@ -93,10 +93,10 @@ public class InscriptionActiviteBean implements MessageListener {
                         System.out.println("bean 17");
                     }else{
                         EnregistreInscription uneE = new EnregistreInscription();
-                        System.out.println("bean 16");
+                        System.out.println("bean 18");
                         activite.setNbLoc(activite.getNbLoc()+1);
                         uneE.updateInscription(activite);
-                        System.out.println("bean 17");
+                        System.out.println("bean 19");
                     }
 
                     //uneE.insertionInscription(uneInsEntity);
