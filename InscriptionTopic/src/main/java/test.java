@@ -1,14 +1,9 @@
-package com.projetcerisaie.metiers;
 
-import Entities.Inscription;
-import com.projetcerisaie.metiers.Entities.ActiviteEntity;
-import com.projetcerisaie.metiers.Entities.ClientEntity;
-import com.projetcerisaie.metiers.dao.ActivityService;
-import com.projetcerisaie.metiers.dao.GeneralOperations;
-import com.projetcerisaie.metiers.meserreurs.MonException;
 
-import javax.annotation.Resource;
-import javax.jms.*;
+import Entities.ActiviteEntity;
+import dao.ActivityService;
+import meserreurs.MonException;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -22,7 +17,7 @@ public class test {
     protected EntityManagerFactory emf;
 
     public EntityTransaction startTransaction() {
-        emf = Persistence.createEntityManagerFactory("NewPersistenceUnit");
+        emf = Persistence.createEntityManagerFactory("PInscription");
         entitymanager = emf.createEntityManager();
 
         return entitymanager.getTransaction();

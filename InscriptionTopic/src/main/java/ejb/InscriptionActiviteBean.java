@@ -76,6 +76,7 @@ public class InscriptionActiviteBean implements MessageListener {
                     ActivityService activityService = new ActivityService();
                     activite = activityService.getSpecificEntities(uneInscription.getCodeSport(),uneInscription.getDateJour(),uneInscription.getNumSej());
                     if(activite == null){
+                        activite = new ActiviteEntity();
                         System.out.println("bean 10");
                         SejourService sejourService = new SejourService();
                         System.out.println("bean 12");

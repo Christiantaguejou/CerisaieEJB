@@ -8,6 +8,7 @@ import Entities.SportEntity;
 import models.Activity;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,10 +84,16 @@ public class ActivityService extends EntityService {
 
     public  ActiviteEntity getSpecificEntities(int codeSport, Date dateInscription, int numSejRes){
         ActiviteEntity activities = null;
-        EntityTransaction transaction = startTransaction();
-        transaction.begin();
-        activities = (ActiviteEntity) entitymanager.createQuery("select a from ActiviteEntity a where a.sport.codeSport = " + codeSport + " and a.dateJour = "+ dateInscription.toString() + " and a.sejoursReservesEntity.numResa = "+ numSejRes);
-        entitymanager.close();
+        try{
+
+            EntityTransaction transaction = startTransaction();
+            transaction.begin();
+            activities = (ActiviteEntity) entitymanager.createQuery("select a from ActiviteEntity a where a.sport.codeSport = " + codeSport + " and a.dateJour = "+ dateInscription + " and a.sejoursReservesEntity.numResa = "+ numSejRes).getSingleResult();
+            entitymanager.close();
+        }catch (NoResultException e){
+            return null;
+        }
+
         return activities;
     }
 

@@ -146,7 +146,11 @@ public class HomeController {
         String destinationPage = "espaceClient/pageAccueilClient.htm";
         try {
             //TODO check si on est le même jour alors on incremente
-           boolean ok = enregistrerActivite(constructActivite(request));
+            /*ActivityService activityService = new ActivityService();
+            Inscription inscription = constructActivite(request);
+            ActiviteEntity activiteEntity = activityService.getSpecificEntities(inscription.getCodeSport(),inscription.getDateJour(),inscription.getNumSej());
+            System.out.println(activiteEntity);*/
+          boolean ok = enregistrerActivite(constructActivite(request));
             if(!ok) {
                 request.setAttribute("MesErreurs", "L'enregistrement a échoué");
                 destinationPage = "Erreur.htm";
