@@ -1,6 +1,7 @@
 package ejb;
 
 
+import dao.ActivityService;
 import dao.SejourService;
 import dao.SportService;
 import Entities.*;
@@ -72,21 +73,31 @@ public class InscriptionActiviteBean implements MessageListener {
                     System.out.println("bean 9");
                     // on transfère les données reçues dans l'objet Entity
                     SportService sportService = new SportService();
-                    System.out.println("bean 10");
-                    SejourService sejourService = new SejourService();
-                    System.out.println("bean 11");
-                    activite.setNbLoc(uneInscription.getNbLoc());
-                    System.out.println("bean 12");
-                    activite.setSejoursReservesEntity(sejourService.getSejourReservesEntity(uneInscription.getNumSej()));
-                    System.out.println("bean 13");
-                    activite.setSport(sportService.getSportEntity(uneInscription.getCodeSport()));
-                    System.out.println("bean 14");
-                    activite.setDateJour(uneInscription.getDateJour());
-                    System.out.println("bean 15");
-                    EnregistreInscription uneE = new EnregistreInscription();
-                    System.out.println("bean 16");
-                    uneE.insertionInscription(activite);
-                    System.out.println("bean 17");
+                    ActivityService activityService = new ActivityService();
+                    activite = activityService.getSpecificEntities(uneInscription.getCodeSport(),uneInscription.getDateJour(),uneInscription.getNumSej());
+                    if(activite == null){
+                        System.out.println("bean 10");
+                        SejourService sejourService = new SejourService();
+                        System.out.println("bean 12");
+                        activite.setSejoursReservesEntity(sejourService.getSejourReservesEntity(uneInscription.getNumSej()));
+                        System.out.println("bean 13");
+                        activite.setSport(sportService.getSportEntity(uneInscription.getCodeSport()));
+                        System.out.println("bean 14");
+                        activite.setDateJour(uneInscription.getDateJour());
+                        System.out.println("bean 15");
+                        activite.setNbLoc(1);
+                        EnregistreInscription uneE = new EnregistreInscription();
+                        System.out.println("bean 16");
+                        uneE.insertionInscription(activite);
+                        System.out.println("bean 17");
+                    }else{
+                        EnregistreInscription uneE = new EnregistreInscription();
+                        System.out.println("bean 16");
+                        activite.setNbLoc(activite.getNbLoc()+1);
+                        uneE.updateInscription(activite);
+                        System.out.println("bean 17");
+                    }
+
                     //uneE.insertionInscription(uneInsEntity);
                 } catch (Exception ex) {
                     EcritureErreur(ex.getMessage());

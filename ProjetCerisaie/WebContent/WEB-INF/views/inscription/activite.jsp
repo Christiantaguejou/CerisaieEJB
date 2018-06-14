@@ -24,7 +24,13 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Code Sport:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="codeSport" name="codeSport" placeholder="codeSport" required>
+            <select class="form-control" id="codeSport" name="codeSport"  required>
+                <option value="1">Tennis</option>
+                <option value="2">VTT</option>
+                <option value="3">Planche à voile</option>
+                <option value="4">Pédalo</option>
+                <option value="5">Canöe</option>
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -38,16 +44,10 @@
     <div class="form-group">
         <label class="col-md-4 col-xs-4">Numéro de séjour:</label>
         <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="numSej" name="numSej" placeholder="numSej" required>
+            <input type="text" class="form-control" id="numSej" name="numSej" value="${sej.numResa}" readonly>
         </div>
     </div>
 
-    <div class="form-group">
-        <label class="col-md-4 col-xs-4">Nombre d'unité:</label>
-        <div class="col-md-8 col-xs-8">
-            <input type="text" class="form-control" id="nbloc" name="nbloc" placeholder="nbloc" required>
-        </div>
-    </div>
 
     <button type="submit" class="btn btn-default">Ajouter</button>
 </form>

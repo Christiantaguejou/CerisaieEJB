@@ -8,13 +8,22 @@
 </head>
 <body>
 <%@ include file="../includes/navbar.jsp" %>
-<h1>Bienvenue ${loggedInClient.nomCli}</h1>
 <div class="container">
+    <div class="container">
+        <div class="page-header">
+            <h1>Bienvenue ${loggedInClient.nomCli}</h1>
+        </div>
+    </div>
     <table cellspacing="0" cellpadding="0" width="100%" border="0" >
         <tr>
             <td valign="top" align="center">
                 <form name='inscription' method="post" action="inscriptionActivite.htm">
                     <button type="submit" class="btn btn-default">S'inscrire à une activité</button>
+                </form>
+            </td>
+            <td valign="top" align="center">
+                <form name='monHistorique' method="post" action="historiqueActivite.htm">
+                    <button type="submit" class="btn btn-default">Mes inscriptions</button>
                 </form>
             </td>
         </tr>

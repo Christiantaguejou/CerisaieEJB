@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 @Controller
 public class HomeController {
@@ -64,13 +65,14 @@ public class HomeController {
     public ModelAndView AfficheLogin(HttpServletRequest request, HttpServletResponse response) {
         return new ModelAndView("login");
     }
-/*
-       @RequestMapping(value = "reservationConfirme.htm")
-        public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
 
-            return new ModelAndView("planning");
-        }
-*/
+    /*
+           @RequestMapping(value = "reservationConfirme.htm")
+            public ModelAndView reservationConfirme(HttpServletRequest request, HttpServletResponse response) {
+
+                return new ModelAndView("planning");
+            }
+    */
     @RequestMapping(value = "planning.htm")
     public ModelAndView listActivities(HttpServletRequest request, HttpServletResponse response) {
         ActivityService service = new ActivityService();
@@ -84,11 +86,11 @@ public class HomeController {
     @RequestMapping(value = "reservationConfirme.htm")
     public ModelAndView reservationConfirme(HttpServletRequest request) {
         String destinationPage = "reservationConfirme";
-        try{
+        try {
             insererSejour(request);
             request.getSession().removeAttribute("numSej");
-           // request.setAttribute("detailsResa",constructSejourReserveEntity(request));
-        }catch (Exception e){
+            // request.setAttribute("detailsResa",constructSejourReserveEntity(request));
+        } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur";
         }
@@ -141,13 +143,9 @@ public class HomeController {
 
     @RequestMapping(value = "insererActivite.htm")
     public View insererActivite(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "listerAdherent.htm";
+        String destinationPage = "espaceClient/pageAccueilClient.htm";
         try {
-            boolean ok = enregistrerActivite(constructActivite(request));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        /*try {
+            //TODO check si on est le même jour alors on incremente
            boolean ok = enregistrerActivite(constructActivite(request));
             if(!ok) {
                 request.setAttribute("MesErreurs", "L'enregistrement a échoué");
@@ -157,7 +155,6 @@ public class HomeController {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur.htm";
         }
-*/
         return new RedirectView(destinationPage);
     }
 
@@ -229,7 +226,19 @@ public class HomeController {
     public ModelAndView inscriptionActivite(HttpServletRequest request, HttpServletResponse response) {
         String destinationPage = "";
         try {
-            destinationPage = "inscription/activite";
+            //get numsej if not redirect to espace client
+            SejourService sejourService = new SejourService();
+            ClientEntity clientEntity = (ClientEntity) request.getSession().getAttribute("loggedInClient");
+            if (clientEntity != null) {
+                SejoursReservesEntity sejoursReservesEntity = sejourService.getActiveSejour(clientEntity.getNumCli());
+                if (sejoursReservesEntity != null) {
+                    request.setAttribute("sej",sejoursReservesEntity);
+                    destinationPage = "inscription/activite";
+                } else {
+                    destinationPage = "espaceClient/pageAccueilClient";
+                }
+            } else destinationPage = "home";
+
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
             destinationPage = "erreur";
@@ -261,6 +270,15 @@ public class HomeController {
     @RequestMapping(value = "erreur.htm", method = RequestMethod.GET)
     public ModelAndView AfficheErreur(HttpServletRequest request, HttpServletResponse response) {
         return new ModelAndView("erreur");
+    }
+
+    @RequestMapping(value = "historiqueActivite.htm")
+    public ModelAndView historique(HttpServletRequest request, HttpServletResponse response) {
+        ActivityService activityService = new ActivityService();
+        ClientEntity clientEntity = (ClientEntity) request.getSession().getAttribute("loggedInClient");
+        List<ActiviteEntity> activiteEntities = activityService.getClientActivities(clientEntity.getNumCli());
+        request.setAttribute("activities",activiteEntities);
+        return new ModelAndView("espaceClient/historiqueActivite");
     }
 
     private ClientEntity constructClientEntity(HttpServletRequest request) {
@@ -301,22 +319,15 @@ public class HomeController {
     }
 
     private Inscription constructActivite(HttpServletRequest request) throws ParseException {
-        //ActiviteEntity activite = new ActiviteEntity();
-        /*Activite activite = new Activite();
-        SportService sportService = new SportService();
-        SejourService sejourService = new SejourService();
-        activite.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
-        activite.setCodeSport(sportService.getSportEntity(Integer.parseInt(request.getParameter("codeSport"))));
-        activite.setNumSej(sejourService.getSejourReservesEntity(Integer.parseInt(request.getParameter("numSej"))));
-        activite.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
-        return activite;*/
         Inscription inscription = new Inscription();
-        inscription.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
+       // inscription.setNbLoc(Integer.parseInt(request.getParameter("nbloc")));
+        inscription.setNbLoc(1);
         inscription.setCodeSport(Integer.parseInt(request.getParameter("codeSport")));
         inscription.setNumSej(Integer.parseInt(request.getParameter("numSej")));
         inscription.setDateJour(convertStringToDate(request.getParameter("dateLocation")));
         return inscription;
     }
+
     //TODO date de deb et fin de sejour doivent etre superieru a la date actuelle
 
     private boolean enregistrerActivite(Inscription inscription) throws Exception {

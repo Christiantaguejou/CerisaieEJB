@@ -13,8 +13,6 @@ public class SejoursReservesEntity implements Serializable {
     private Date datedebSej;
     private Date dateFinSej;
     private int nbPersonnes;
-    private int numSej;
-    private int numCli;
     private int numCarteCredit;
     private String typeCarteCredit;
     private Date dateExpirationCarte;

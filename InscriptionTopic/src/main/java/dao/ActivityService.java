@@ -8,6 +8,7 @@ import Entities.SportEntity;
 import models.Activity;
 
 import javax.persistence.EntityTransaction;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +77,15 @@ public class ActivityService extends EntityService {
         EntityTransaction transaction = startTransaction();
         transaction.begin();
         activities = (List<ActiviteEntity>) entitymanager.createQuery("select a from ActiviteEntity a where a.codeSport = " + idSport + "order by DateJour DESC ").getResultList();
+        entitymanager.close();
+        return activities;
+    }
+
+    public  ActiviteEntity getSpecificEntities(int codeSport, Date dateInscription, int numSejRes){
+        ActiviteEntity activities = null;
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        activities = (ActiviteEntity) entitymanager.createQuery("select a from ActiviteEntity a where a.sport.codeSport = " + codeSport + " and a.dateJour = "+ dateInscription.toString() + " and a.sejoursReservesEntity.numResa = "+ numSejRes);
         entitymanager.close();
         return activities;
     }

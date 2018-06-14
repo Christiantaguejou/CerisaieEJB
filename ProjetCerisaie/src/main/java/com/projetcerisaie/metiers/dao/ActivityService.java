@@ -78,4 +78,14 @@ public class ActivityService extends EntityService {
         return activities;
     }
 
+    public List<ActiviteEntity> getClientActivities(int numCli){
+        List<ActiviteEntity> activities = null;
+        EntityTransaction transaction = startTransaction();
+        transaction.begin();
+        activities = (List<ActiviteEntity>) entitymanager.createQuery("select a from ActiviteEntity a where a.sejoursReservesEntity.clientEntity.numCli = " + numCli).getResultList();
+        entitymanager.close();
+        return activities;
+
+    }
+
 }
