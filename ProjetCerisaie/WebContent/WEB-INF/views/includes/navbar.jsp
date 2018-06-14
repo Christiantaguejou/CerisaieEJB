@@ -15,7 +15,7 @@
                 <li><a href="login.htm"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </c:if>
             <c:if test="${not empty loggedInClient}">
-                <li><a active> Utilisateur ${loggedInClient.username}</a></li>
+                <li><a class="active" href="espaceClient.htm"> Utilisateur ${loggedInClient.username}</a></li>
                 <li><a href="disconnect.htm"><span class="glyphicon glyphicon-log-out"></span> Deconnexion</a></li>
             </c:if>
         </ul>
