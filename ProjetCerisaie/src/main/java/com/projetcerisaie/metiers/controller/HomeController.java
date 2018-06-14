@@ -151,8 +151,8 @@ public class HomeController {
     }
 
     @RequestMapping(value = "insererActivite.htm")
-    public View insererActivite(HttpServletRequest request, HttpServletResponse response) {
-        String destinationPage = "espaceClient/pageAccueilClient.htm";
+    public ModelAndView insererActivite(HttpServletRequest request, HttpServletResponse response) {
+        String destinationPage = "espaceClient/pageAccueilClient";
         ClientEntity clientSession = (ClientEntity) request.getSession().getAttribute("loggedInClient");
         SejourService sejourService = new SejourService();
         List<SejoursReservesEntity> sejoursDuCli = sejourService.getSejoursReservesByClient(clientSession.getNumCli());
@@ -166,13 +166,13 @@ public class HomeController {
           boolean ok = enregistrerActivite(constructActivite(request));
             if(!ok) {
                 request.setAttribute("MesErreurs", "L'enregistrement a échoué");
-                destinationPage = "Erreur.htm";
+                destinationPage = "erreur";
             }
         } catch (Exception e) {
             request.setAttribute("MesErreurs", e.getMessage());
-            destinationPage = "erreur.htm";
+            destinationPage = "erreur";
         }
-        return new RedirectView(destinationPage);
+        return new ModelAndView(destinationPage);
     }
 
     public void insererSejour(HttpServletRequest request) {
@@ -280,6 +280,9 @@ public class HomeController {
             http.setAttribute("numSej", numSej);
             if (http.getAttribute("loggedInClient") != null) {
                 if (!http.getAttribute("loggedInClient").equals("")) {
+                    SejourService sejourService = new SejourService();
+                    SejoursProposesEntity sejourPropose = sejourService.getSejourProposesEntity((int) http.getAttribute("numSej"));
+                    request.setAttribute("sejourProposeEntity", sejourPropose);
                     destinationPage = "confirmeReservation";
                 }
             }
